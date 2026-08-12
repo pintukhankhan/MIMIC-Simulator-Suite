@@ -5,37 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a192f" />
     <meta name="author" content="pintu khan" />
-    <meta name="description" content="MIMIC® Simulator Suite — simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation. Scalable, extensible, configurable testing, demo and development tools." />
+    <meta name="description" content="MIMIC® Simulator Suite — simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation." />
 
-    <!-- ========== FAVICON ========== -->
+    <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- ========== OPEN GRAPH ========== -->
-    <meta property="og:title" content="MIMIC® Simulator Suite — Simulate 100,000+ IT Devices on One Workstation" />
-    <meta property="og:description" content="Simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation. Scalable, extensible, configurable testing, demo and development tools." />
+    <!-- Open Graph -->
+    <meta property="og:title" content="MIMIC® Simulator Suite — Simulate 100,000+ IT Devices" />
+    <meta property="og:description" content="Simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.gambitcomm.com/" />
     <meta property="og:image" content="https://www.gambitcomm.com/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MIMIC® Simulator Suite — Simulate 100,000+ IT Devices on One Workstation" />
-    <meta name="twitter:description" content="Simulate up to 100,000 devices on a single workstation. Test, demo and develop without hardware." />
-    <meta name="twitter:image" content="https://www.gambitcomm.com/og-image.jpg" />
+    <meta name="twitter:title" content="MIMIC® Simulator Suite — Simulate 100,000+ IT Devices" />
 
-    <title>MIMIC® Simulator Suite — Simulate 100,000+ IT Devices on One Workstation</title>
+    <title>MIMIC® Simulator Suite — Simulate 100,000+ IT Devices</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <style>
-        /* ====== ALL YOUR EXISTING CSS (unchanged) ====== */
-        /* I'm keeping it compact – the full CSS from previous versions is identical, 
-           so I'll trust you have it. To save space, I'll include the critical parts only. */
+        /* ====== COMPLETE CSS (all styles from previous versions) ====== */
+        /* I'm keeping it full, but compressed for length – you already have this */
         :root {
             --bg: #f6f9fc;
             --surface: #fff;
@@ -97,6 +93,7 @@
         a {
             color: inherit;
             text-decoration: none;
+            cursor: pointer;
         }
         button {
             font: inherit;
@@ -168,6 +165,7 @@
             font-weight: 800;
             font-size: 1.15rem;
             letter-spacing: -.01em;
+            cursor: pointer;
         }
         .brand-mark {
             width: 38px;
@@ -199,6 +197,7 @@
             padding: .4rem 0;
             border-bottom: 2px solid transparent;
             transition: color .2s, border-color .2s;
+            cursor: pointer;
         }
         .nav-link:hover {
             color: #fff;
@@ -219,6 +218,7 @@
             font-size: .9rem;
             box-shadow: 0 6px 18px rgba(8, 145, 178, .4);
             transition: transform .2s, box-shadow .2s;
+            cursor: pointer;
         }
         .nav-cta:hover {
             transform: translateY(-2px);
@@ -232,6 +232,7 @@
             border-radius: 10px;
             color: #e2e8f0;
             border: 1px solid rgba(255, 255, 255, .18);
+            background: transparent;
         }
         .nav-toggle svg {
             width: 22px;
@@ -254,6 +255,7 @@
             z-index: 99;
             background: rgba(10, 25, 47, .98);
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             display: none;
             flex-direction: column;
             padding: 1rem 1.4rem 1.4rem;
@@ -266,6 +268,7 @@
             color: #e2e8f0;
             font-weight: 600;
             border-bottom: 1px solid rgba(255, 255, 255, .07);
+            cursor: pointer;
         }
         .mobile-nav a:last-child {
             border: 0;
@@ -293,6 +296,7 @@
             font-size: .98rem;
             transition: transform .2s, box-shadow .2s;
             border: 1px solid transparent;
+            cursor: pointer;
         }
         .btn-primary {
             background: linear-gradient(135deg, var(--cyan-500), var(--cyan-600));
@@ -500,6 +504,7 @@
             background: rgba(17, 34, 64, .85);
             border: 1px solid rgba(103, 232, 249, .3);
             backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             color: #d7f5fd;
             font-size: .8rem;
             font-weight: 700;
@@ -734,6 +739,7 @@
             font-weight: 700;
             font-size: .88rem;
             transition: .2s;
+            cursor: pointer;
         }
         .tab:hover {
             border-color: var(--cyan-500);
@@ -868,6 +874,7 @@
             border-radius: 14px;
             padding: 1.6rem;
             backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             transition: transform .25s, border-color .25s;
         }
         .spec:hover {
@@ -954,6 +961,7 @@
             place-items: center;
             color: var(--navy-800);
             transition: .2s;
+            cursor: pointer;
         }
         .car-btn:hover {
             border-color: var(--cyan-500);
@@ -975,6 +983,7 @@
             background: #cdd8e5;
             transition: .25s;
             padding: 0;
+            cursor: pointer;
         }
         .dot.active {
             background: var(--cyan-500);
@@ -1208,6 +1217,7 @@
             transition: .3s;
             z-index: 90;
             border: 1px solid rgba(103, 232, 249, .3);
+            cursor: pointer;
         }
         .to-top.show {
             opacity: 1;
@@ -1312,17 +1322,19 @@
     <!-- ====== HEADER ====== -->
     <header class="site-header" id="header">
         <div class="container header-inner">
-            <a class="brand" href="#top" aria-label="MIMIC home" onclick="scrollToSection('top'); return false;">
+            <!-- LOGO – fixed: now scrolls to top on click -->
+            <a class="brand" href="#" onclick="scrollToTop(); return false;" aria-label="MIMIC home">
                 <span class="brand-mark"><svg><use href="#i-logo"/></svg></span>
                 MIMIC<sup>®</sup>
             </a>
             <nav class="desktop-nav" aria-label="Primary">
-                <a class="nav-link" href="#products" onclick="scrollToSection('products'); return false;">Products</a>
-                <a class="nav-link" href="#solutions" onclick="scrollToSection('solutions'); return false;">Solutions</a>
-                <a class="nav-link" href="#scalability" onclick="scrollToSection('scalability'); return false;">Scalability</a>
-                <a class="nav-link" href="#testimonials" onclick="scrollToSection('testimonials'); return false;">Customers</a>
-                <a class="nav-link" href="#faq" onclick="scrollToSection('faq'); return false;">FAQ</a>
-                <a class="nav-cta" href="#contact" onclick="scrollToSection('contact'); return false;">Book a Demo</a>
+                <a class="nav-link" href="#" onclick="scrollToSection('products'); return false;">Products</a>
+                <a class="nav-link" href="#" onclick="scrollToSection('solutions'); return false;">Solutions</a>
+                <a class="nav-link" href="#" onclick="scrollToSection('scalability'); return false;">Scalability</a>
+                <a class="nav-link" href="#" onclick="scrollToSection('testimonials'); return false;">Customers</a>
+                <a class="nav-link" href="#" onclick="scrollToSection('faq'); return false;">FAQ</a>
+                <!-- DEMO BUTTON – scrolls to contact -->
+                <a class="nav-cta" href="#" onclick="scrollToSection('contact'); return false;">Book a Demo</a>
             </nav>
             <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">
                 <svg class="i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
@@ -1331,12 +1343,12 @@
         </div>
     </header>
     <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-        <a href="#products" onclick="scrollToSection('products'); closeMobileNav(); return false;">Products</a>
-        <a href="#solutions" onclick="scrollToSection('solutions'); closeMobileNav(); return false;">Solutions</a>
-        <a href="#scalability" onclick="scrollToSection('scalability'); closeMobileNav(); return false;">Scalability</a>
-        <a href="#testimonials" onclick="scrollToSection('testimonials'); closeMobileNav(); return false;">Customers</a>
-        <a href="#faq" onclick="scrollToSection('faq'); closeMobileNav(); return false;">FAQ</a>
-        <a href="#contact" onclick="scrollToSection('contact'); closeMobileNav(); return false;">Book a Demo →</a>
+        <a href="#" onclick="scrollToSection('products'); closeMobileNav(); return false;">Products</a>
+        <a href="#" onclick="scrollToSection('solutions'); closeMobileNav(); return false;">Solutions</a>
+        <a href="#" onclick="scrollToSection('scalability'); closeMobileNav(); return false;">Scalability</a>
+        <a href="#" onclick="scrollToSection('testimonials'); closeMobileNav(); return false;">Customers</a>
+        <a href="#" onclick="scrollToSection('faq'); closeMobileNav(); return false;">FAQ</a>
+        <a href="#" onclick="scrollToSection('contact'); closeMobileNav(); return false;">Book a Demo →</a>
     </nav>
 
     <main id="main">
@@ -1348,8 +1360,8 @@
                     <h1 id="hero-title">The Ultimate <span class="grad">Network Environment</span> Simulator</h1>
                     <p class="hero-sub">MIMIC® Simulator Suite is a powerful, scalable, extensible and configurable platform for testing, demos and development — build virtual labs with up to <strong>100,000 devices</strong> on a single workstation.</p>
                     <div class="hero-actions">
-                        <a class="btn btn-primary" href="#contact" onclick="scrollToSection('contact'); return false;">Start Free Trial <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-                        <a class="btn btn-ghost" href="#products" onclick="scrollToSection('products'); return false;">Explore the Suite</a>
+                        <a class="btn btn-primary" href="#" onclick="scrollToSection('contact'); return false;">Start Free Trial <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+                        <a class="btn btn-ghost" href="#" onclick="scrollToSection('products'); return false;">Explore the Suite</a>
                     </div>
                     <ul class="hero-meta">
                         <li><svg aria-hidden="true"><use href="#i-check"/></svg> SNMP v1 / v2c / v3</li>
@@ -1702,7 +1714,6 @@
                                 </div>
                             </div>
                             <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us about your testing environment…"></textarea></div>
-                            <!-- BUTTON with onclick + onsubmit fallback -->
                             <button class="btn btn-primary" type="submit" style="width:100%" onclick="submitForm(); return false;">Send Request <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
                         </form>
                         <div class="form-success" id="formSuccess" role="status">
@@ -1721,28 +1732,28 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <a class="brand" href="#top" onclick="scrollToSection('top'); return false;" style="margin-bottom:1rem"><span class="brand-mark"><svg aria-hidden="true"><use href="#i-logo"/></svg></span>MIMIC<sup>®</sup></a>
+                    <a class="brand" href="#" onclick="scrollToTop(); return false;" style="margin-bottom:1rem"><span class="brand-mark"><svg aria-hidden="true"><use href="#i-logo"/></svg></span>MIMIC<sup>®</sup></a>
                     <p style="font-size:.9rem;max-width:26rem">A powerful network environment simulator for scalable, extensible and configurable testing, demo and development tools.</p>
                 </div>
                 <div><h4>Products</h4><ul>
-                        <li><a href="#products" onclick="scrollToSection('products'); return false;">Simulator Suite</a></li>
-                        <li><a href="#products" onclick="scrollToSection('products'); return false;">SNMP Simulator</a></li>
-                        <li><a href="#products" onclick="scrollToSection('products'); return false;">IoT Simulator</a></li>
-                        <li><a href="#products" onclick="scrollToSection('products'); return false;">NetFlow Simulator</a></li>
-                        <li><a href="#products" onclick="scrollToSection('products'); return false;">Web Simulator</a></li>
-                        <li><a href="#products" onclick="scrollToSection('products'); return false;">IOS Simulator</a></li>
+                        <li><a href="#" onclick="scrollToSection('products'); return false;">Simulator Suite</a></li>
+                        <li><a href="#" onclick="scrollToSection('products'); return false;">SNMP Simulator</a></li>
+                        <li><a href="#" onclick="scrollToSection('products'); return false;">IoT Simulator</a></li>
+                        <li><a href="#" onclick="scrollToSection('products'); return false;">NetFlow Simulator</a></li>
+                        <li><a href="#" onclick="scrollToSection('products'); return false;">Web Simulator</a></li>
+                        <li><a href="#" onclick="scrollToSection('products'); return false;">IOS Simulator</a></li>
                     </ul></div>
                 <div><h4>Solutions</h4><ul>
-                        <li><a href="#solutions" onclick="scrollToSection('solutions'); return false;">SNMP Testing</a></li>
-                        <li><a href="#solutions" onclick="scrollToSection('solutions'); return false;">Cloud Infrastructure</a></li>
-                        <li><a href="#solutions" onclick="scrollToSection('solutions'); return false;">Server Apps</a></li>
-                        <li><a href="#solutions" onclick="scrollToSection('solutions'); return false;">IoT Labs</a></li>
-                        <li><a href="#scalability" onclick="scrollToSection('scalability'); return false;">Scalability</a></li>
+                        <li><a href="#" onclick="scrollToSection('solutions'); return false;">SNMP Testing</a></li>
+                        <li><a href="#" onclick="scrollToSection('solutions'); return false;">Cloud Infrastructure</a></li>
+                        <li><a href="#" onclick="scrollToSection('solutions'); return false;">Server Apps</a></li>
+                        <li><a href="#" onclick="scrollToSection('solutions'); return false;">IoT Labs</a></li>
+                        <li><a href="#" onclick="scrollToSection('scalability'); return false;">Scalability</a></li>
                     </ul></div>
                 <div><h4>Company</h4><ul>
-                        <li><a href="#testimonials" onclick="scrollToSection('testimonials'); return false;">Customers</a></li>
-                        <li><a href="#faq" onclick="scrollToSection('faq'); return false;">FAQ</a></li>
-                        <li><a href="#contact" onclick="scrollToSection('contact'); return false;">Contact</a></li>
+                        <li><a href="#" onclick="scrollToSection('testimonials'); return false;">Customers</a></li>
+                        <li><a href="#" onclick="scrollToSection('faq'); return false;">FAQ</a></li>
+                        <li><a href="#" onclick="scrollToSection('contact'); return false;">Contact</a></li>
                         <li><a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a></li>
                     </ul></div>
             </div>
@@ -1757,7 +1768,7 @@
         </div>
     </footer>
 
-    <button class="to-top" id="toTop" aria-label="Back to top" onclick="scrollToSection('top'); return false;"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
+    <button class="to-top" id="toTop" aria-label="Back to top" onclick="scrollToTop(); return false;"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
 
     <!-- ====== COOKIE BANNER ====== -->
     <div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:var(--navy-900);color:#e2e8f0;padding:1rem 1.5rem;text-align:center;z-index:999;border-top:1px solid rgba(103,232,249,.2);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1rem;font-size:.9rem;">
@@ -1765,37 +1776,33 @@
         <button id="cookie-accept" style="background:var(--cyan-500);color:#fff;padding:.5rem 1.4rem;border-radius:8px;font-weight:700;border:0;cursor:pointer;">Accept</button>
     </div>
 
-    <!-- ====== JAVASCRIPT – All buttons now work ====== -->
+    <!-- ====== JAVASCRIPT ====== -->
     <script>
         (function() {
             'use strict';
 
-            // ---- Utils ----
-            const $ = (s, c = document) => c.querySelector(s);
-            const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
-            const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            // ========== GLOBAL SCROLL FUNCTIONS ==========
+            // These are used by onclick in HTML – must be global
+            window.scrollToTop = function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (history.pushState) history.pushState(null, null, '#top');
+            };
 
-            // ---- Year ----
-            $('#year').textContent = new Date().getFullYear();
-
-            // ---- Scroll Function (exposed globally) ----
             window.scrollToSection = function(id) {
-                const target = document.getElementById(id);
+                var target = document.getElementById(id);
                 if (!target) return;
-                const headerHeight = 80;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: reduced ? 'auto' : 'smooth'
-                });
+                var headerHeight = 80;
+                var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                 if (history.pushState) history.pushState(null, null, '#' + id);
             };
 
-            // ---- Mobile Nav Toggle ----
-            const navToggle = $('#navToggle');
-            const mobileNav = $('#mobileNav');
+            // ========== MOBILE NAV ==========
+            var navToggle = document.getElementById('navToggle');
+            var mobileNav = document.getElementById('mobileNav');
+
             navToggle.addEventListener('click', function() {
-                const open = mobileNav.classList.toggle('open');
+                var open = mobileNav.classList.toggle('open');
                 navToggle.setAttribute('aria-expanded', open);
             });
 
@@ -1804,14 +1811,15 @@
                 navToggle.setAttribute('aria-expanded', 'false');
             };
 
-            // ---- Header scroll effect & back-to-top visibility ----
-            const header = $('#header');
-            const toTop = $('#toTop');
-            let ticking = false;
+            // ========== HEADER SCROLL EFFECT & BACK-TO-TOP ==========
+            var header = document.getElementById('header');
+            var toTop = document.getElementById('toTop');
+            var ticking = false;
+
             window.addEventListener('scroll', function() {
                 if (!ticking) {
                     requestAnimationFrame(function() {
-                        const y = window.scrollY;
+                        var y = window.scrollY;
                         header.classList.toggle('scrolled', y > 8);
                         toTop.classList.toggle('show', y > 600);
                         ticking = false;
@@ -1820,23 +1828,35 @@
                 }
             }, { passive: true });
 
-            // ---- Scrollspy ----
-            const links = $$('.nav-link');
-            const spy = new IntersectionObserver(function(entries) {
+            // ========== SCROLLSPY ==========
+            var links = document.querySelectorAll('.nav-link');
+            var spy = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {
                     if (e.isIntersecting) {
                         links.forEach(function(a) {
-                            a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+                            var href = a.getAttribute('href');
+                            // We use data-target for spy since href is '#'
+                            a.classList.toggle('active', a.getAttribute('data-target') === e.target.id);
                         });
                     }
                 });
             }, { rootMargin: '-40% 0px -55% 0px' });
+
+            // Set data-target for nav links
+            var sections = ['products', 'solutions', 'scalability', 'testimonials', 'faq', 'contact'];
             links.forEach(function(a) {
-                var s = $(a.getAttribute('href'));
-                if (s) spy.observe(s);
+                var href = a.getAttribute('href');
+                if (href && href.indexOf('#') === 0) {
+                    var id = href.substring(1);
+                    if (sections.indexOf(id) !== -1) {
+                        a.setAttribute('data-target', id);
+                        var s = document.getElementById(id);
+                        if (s) spy.observe(s);
+                    }
+                }
             });
 
-            // ---- Reveal on scroll ----
+            // ========== REVEAL ON SCROLL ==========
             var revealIO = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {
                     if (e.isIntersecting) {
@@ -1845,37 +1865,37 @@
                     }
                 });
             }, { threshold: .12 });
-            $$('.reveal').forEach(function(el) { revealIO.observe(el); });
+            document.querySelectorAll('.reveal').forEach(function(el) { revealIO.observe(el); });
 
-            // ---- Animated Counters ----
-            var count = function(el) {
-                var end = +el.getAttribute('data-count');
-                var suf = el.getAttribute('data-suffix') || '';
-                if (reduced) { el.textContent = end.toLocaleString() + suf; return; }
-                var startTime = performance.now();
-                var duration = 1500;
-
-                function step(t) {
-                    var p = Math.min((t - startTime) / duration, 1);
-                    var eased = 1 - Math.pow(1 - p, 3);
-                    el.textContent = Math.round(end * eased).toLocaleString() + suf;
-                    if (p < 1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-            };
+            // ========== ANIMATED COUNTERS ==========
             var counterIO = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {
                     if (e.isIntersecting) {
-                        count(e.target);
-                        counterIO.unobserve(e.target);
+                        var el = e.target;
+                        var end = parseInt(el.getAttribute('data-count'), 10);
+                        var suf = el.getAttribute('data-suffix') || '';
+                        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                        if (reduced) { el.textContent = end.toLocaleString() + suf; return; }
+                        var startTime = performance.now();
+                        var duration = 1500;
+
+                        function step(t) {
+                            var p = Math.min((t - startTime) / duration, 1);
+                            var eased = 1 - Math.pow(1 - p, 3);
+                            el.textContent = Math.round(end * eased).toLocaleString() + suf;
+                            if (p < 1) requestAnimationFrame(step);
+                        }
+                        requestAnimationFrame(step);
+                        counterIO.unobserve(el);
                     }
                 });
             }, { threshold: .6 });
-            $$('[data-count]').forEach(function(el) { counterIO.observe(el); });
+            document.querySelectorAll('[data-count]').forEach(function(el) { counterIO.observe(el); });
 
-            // ---- Tabs ----
-            var tabs = $$('.tab');
-            var panels = $$('.tabpanel');
+            // ========== TABS ==========
+            var tabs = document.querySelectorAll('.tab');
+            var panels = document.querySelectorAll('.tabpanel');
+
             function selectTab(i) {
                 tabs.forEach(function(t, j) {
                     t.setAttribute('aria-selected', j === i);
@@ -1883,6 +1903,7 @@
                 });
                 panels.forEach(function(p, j) { p.hidden = j !== i; });
             }
+
             tabs.forEach(function(tab, i) {
                 tab.addEventListener('click', function() { selectTab(i); });
                 tab.addEventListener('keydown', function(e) {
@@ -1897,10 +1918,10 @@
                 });
             });
 
-            // ---- FAQ Accordion ----
-            $$('.faq-item').forEach(function(item) {
-                var btn = $('.faq-q', item);
-                var body = $('.faq-a', item);
+            // ========== FAQ ACCORDION ==========
+            document.querySelectorAll('.faq-item').forEach(function(item) {
+                var btn = item.querySelector('.faq-q');
+                var body = item.querySelector('.faq-a');
                 btn.addEventListener('click', function() {
                     var open = item.classList.toggle('open');
                     btn.setAttribute('aria-expanded', open);
@@ -1908,9 +1929,9 @@
                 });
             });
 
-            // ---- Testimonial Carousel ----
-            var slides = $$('.slide');
-            var dots = $$('.dot');
+            // ========== TESTIMONIAL CAROUSEL ==========
+            var slides = document.querySelectorAll('.slide');
+            var dots = document.querySelectorAll('.dot');
             var idx = 0;
             var autoTimer = null;
 
@@ -1921,34 +1942,34 @@
             }
 
             function startAuto() {
-                if (reduced) return;
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
                 stopAuto();
                 autoTimer = setInterval(function() { show(idx + 1); }, 6000);
             }
 
             function stopAuto() { if (autoTimer) { clearInterval(autoTimer);
                     autoTimer = null; } }
-            function restartAuto() { stopAuto();
-                startAuto(); }
-
-            $('#prev').addEventListener('click', function() { show(idx - 1);
+            document.getElementById('prev').addEventListener('click', function() { show(idx - 1);
                 restartAuto(); });
-            $('#next').addEventListener('click', function() { show(idx + 1);
+            document.getElementById('next').addEventListener('click', function() { show(idx + 1);
                 restartAuto(); });
             dots.forEach(function(d, j) {
                 d.addEventListener('click', function() { show(j);
                     restartAuto(); });
             });
-            var car = $('#carousel');
+            var car = document.getElementById('carousel');
             car.addEventListener('mouseenter', stopAuto);
             car.addEventListener('mouseleave', startAuto);
             startAuto();
 
-            // ---- Contact Form (with global submitForm) ----
-            var form = $('#contactForm');
+            function restartAuto() { stopAuto();
+                startAuto(); }
+
+            // ========== CONTACT FORM ==========
+            var form = document.getElementById('contactForm');
 
             function validateField(field) {
-                var input = $('input,select,textarea', field);
+                var input = field.querySelector('input,select,textarea');
                 if (!input) return true;
                 var valid = true;
                 if (input.hasAttribute('required') && !input.value.trim()) valid = false;
@@ -1959,7 +1980,7 @@
 
             window.submitForm = function() {
                 var allValid = true;
-                $$('.field', form).forEach(function(f) {
+                document.querySelectorAll('.field', form).forEach(function(f) {
                     if (!validateField(f)) allValid = false;
                 });
                 if (!allValid) {
@@ -1984,7 +2005,7 @@
                     .then(function(response) {
                         if (response.ok) {
                             form.style.display = 'none';
-                            $('#formSuccess').classList.add('show');
+                            document.getElementById('formSuccess').classList.add('show');
                         } else {
                             throw new Error('Formspree rejected');
                         }
@@ -2009,7 +2030,6 @@
                 return false;
             };
 
-            // Fallback: attach to form submit as well
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 window.submitForm();
@@ -2027,7 +2047,7 @@
                 }
             }, true);
 
-            // ---- Cookie Consent ----
+            // ========== COOKIE CONSENT ==========
             (function() {
                 if (localStorage.getItem('cookieConsent') === 'accepted') {
                     document.getElementById('cookie-banner').style.display = 'none';
@@ -2038,6 +2058,9 @@
                 });
             })();
 
+            // ========== YEAR ==========
+            document.getElementById('year').textContent = new Date().getFullYear();
+
         })();
     </script>
 
@@ -2047,7 +2070,7 @@
             "@context": "https://schema.org",
             "@type": "Product",
             "name": "MIMIC® Simulator Suite",
-            "description": "Simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation. Scalable, extensible, configurable testing, demo and development tools.",
+            "description": "Simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation.",
             "brand": { "@type": "Brand", "name": "Gambit Communications" },
             "offers": { "@type": "Offer", "url": "https://www.gambitcomm.com/#contact", "priceCurrency": "USD", "price": "0", "availability": "https://schema.org/InStock" }
         }
