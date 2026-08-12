@@ -1790,7 +1790,7 @@
                     </div>
                     <div class="faq-item">
                         <button class="faq-q" aria-expanded="false">Is a free trial available? <svg aria-hidden="true"><use href="#i-chev" /></svg></button>
-                        <div class="faq-a"><div class="faq-a-inner">Yes — contact our sales team at <a href="mailto:sales@gambitcomm.com">sales@gambitcomm.com</a> or (603) 889-5100 to get an evaluation license and a live demonstration.</div></div>
+                        <div class="faq-a"><div class="faq-a-inner">Yes — contact our sales team at <a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a> to get an evaluation license and a live demonstration.</div></div>
                     </div>
                 </div>
             </div>
@@ -1810,8 +1810,8 @@
                     <div class="contact-info">
                         <h3>Gambit Communications<sup>®</sup></h3>
                         <p>Provider of tools for simulating IoT things, servers, networking and storage devices — trusted for testing, development, deployment, operator training and disaster simulations.</p>
-                        <div class="c-line"><svg aria-hidden="true"><use href="#i-mail" /></svg><a href="mailto:sales@gambitcomm.com">sales@gambitcomm.com</a></div>
-                        <div class="c-line"><svg aria-hidden="true"><use href="#i-phone" /></svg><a href="tel:+16038895100">(603) 889-5100</a></div>
+                        <!-- Email only – phone removed as requested -->
+                        <div class="c-line"><svg aria-hidden="true"><use href="#i-mail" /></svg><a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a></div>
                         <div class="c-line"><svg aria-hidden="true"><use href="#i-check" /></svg>Response within one business day</div>
                     </div>
                     <div class="form-card">
@@ -1837,7 +1837,7 @@
                         <div class="form-success" id="formSuccess" role="status">
                             <div class="ok"><svg aria-hidden="true"><use href="#i-check" /></svg></div>
                             <h3>Thank you!</h3>
-                            <p style="color:var(--muted)">Your request has been received. Our engineering team will contact you within one business day.</p>
+                            <p style="color:var(--muted)">Your request has been received. Our team will contact you within one business day.</p>
                         </div>
                     </div>
                 </div>
@@ -1867,8 +1867,8 @@
                     </ul></div>
                 <div><h4>Company</h4><ul>
                         <li><a href="#testimonials">Customers</a></li><li><a href="#faq">FAQ</a></li>
-                        <li><a href="#contact">Contact</a></li><li><a href="mailto:sales@gambitcomm.com">sales@gambitcomm.com</a></li>
-                        <li><a href="tel:+16038895100">(603) 889-5100</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a></li>
                     </ul></div>
             </div>
             <div class="footer-bottom">
@@ -1893,7 +1893,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — Production‑grade with LIVE Formspree ID
+    JAVASCRIPT — Production‑grade with LIVE Formspree ID & fixed anchor scroll
     ============================================================ -->
     <script>
         (function() {
@@ -1944,24 +1944,24 @@
                 });
             });
 
-            // ---- SMOOTH ANCHOR SCROLLING WITH HEADER OFFSET ----
-            const allAnchors = $$('a[href^="#"]');
-            allAnchors.forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    const target = document.querySelector(targetId);
-                    if (!target) return;
-                    e.preventDefault();
-                    const headerHeight = 80;
-                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset -
-                        headerHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: reduced ? 'auto' : 'smooth'
-                    });
-                    history.pushState(null, null, targetId);
+            // ---- FIXED: SMOOTH ANCHOR SCROLLING WITH HEADER OFFSET (event delegation) ----
+            document.addEventListener('click', function(e) {
+                const anchor = e.target.closest('a[href^="#"]');
+                if (!anchor) return;
+                const targetId = anchor.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (!target) return;
+                e.preventDefault();
+                const headerHeight = 80;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: reduced ? 'auto' : 'smooth'
                 });
+                if (history.pushState) {
+                    history.pushState(null, null, targetId);
+                }
             });
 
             // ---- Scrollspy ----
@@ -2095,9 +2095,7 @@
             car.addEventListener('mouseleave', startAuto);
             startAuto();
 
-            // ============================================================
-            // CONTACT FORM – LIVE SUBMISSION (Formspree ID: 55986e8e-7ec0-4214-8ca2-f9ee1810c99f)
-            // ============================================================
+            // ---- CONTACT FORM – LIVE SUBMISSION (Formspree ID: 55986e8e-7ec0-4214-8ca2-f9ee1810c99f) ----
             const form = $('#contactForm');
 
             function validateField(field) {
@@ -2127,7 +2125,7 @@
                 const data = new FormData(form);
                 const payload = Object.fromEntries(data.entries());
 
-                // ✅ Your live Formspree endpoint
+                // Your live Formspree endpoint
                 const endpoint = 'https://formspree.io/f/55986e8e-7ec0-4214-8ca2-f9ee1810c99f';
 
                 fetch(endpoint, {
@@ -2144,7 +2142,7 @@
                         }
                     })
                     .catch(() => {
-                        alert('Something went wrong. Please email us directly at sales@gambitcomm.com');
+                        alert('Something went wrong. Please email us directly at pintukhankhan405@gmail.com');
                     })
                     .finally(() => {
                         btn.innerHTML = originalText;
@@ -2238,7 +2236,7 @@
                 "name": "Is a free trial available?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes — contact our sales team at sales@gambitcomm.com or (603) 889-5100 to get an evaluation license and a live demonstration."
+                    "text": "Yes — contact our sales team at pintukhankhan405@gmail.com to get an evaluation license and a live demonstration."
                 }
             }]
         }
