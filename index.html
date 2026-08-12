@@ -29,7 +29,7 @@
     <meta name="twitter:description" content="Simulate up to 100,000 devices on a single workstation. Test, demo and develop without hardware." />
     <meta name="twitter:image" content="https://www.gambitcomm.com/og-image.jpg" />
 
-    <!-- ========== PRIMARY TITLE (OPTION A) ========== -->
+    <!-- ========== PRIMARY TITLE ========== -->
     <title>MIMIC® Simulator Suite — Simulate 100,000+ IT Devices on One Workstation</title>
 
     <!-- Preconnect for critical third‑party origins -->
@@ -1810,7 +1810,7 @@
                     <div class="contact-info">
                         <h3>Gambit Communications<sup>®</sup></h3>
                         <p>Provider of tools for simulating IoT things, servers, networking and storage devices — trusted for testing, development, deployment, operator training and disaster simulations.</p>
-                        <!-- Email only – phone removed as requested -->
+                        <!-- Email only – phone removed -->
                         <div class="c-line"><svg aria-hidden="true"><use href="#i-mail" /></svg><a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a></div>
                         <div class="c-line"><svg aria-hidden="true"><use href="#i-check" /></svg>Response within one business day</div>
                     </div>
@@ -1893,7 +1893,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — Production‑grade with LIVE Formspree ID & fixed anchor scroll
+    JAVASCRIPT — Production‑grade with robust form fallback
     ============================================================ -->
     <script>
         (function() {
@@ -1944,7 +1944,7 @@
                 });
             });
 
-            // ---- FIXED: SMOOTH ANCHOR SCROLLING WITH HEADER OFFSET (event delegation) ----
+            // ---- FIXED: SMOOTH ANCHOR SCROLLING (event delegation) ----
             document.addEventListener('click', function(e) {
                 const anchor = e.target.closest('a[href^="#"]');
                 if (!anchor) return;
@@ -2095,7 +2095,7 @@
             car.addEventListener('mouseleave', startAuto);
             startAuto();
 
-            // ---- CONTACT FORM – LIVE SUBMISSION (Formspree ID: 55986e8e-7ec0-4214-8ca2-f9ee1810c99f) ----
+            // ---- CONTACT FORM – LIVE SUBMISSION with mailto fallback ----
             const form = $('#contactForm');
 
             function validateField(field) {
@@ -2103,14 +2103,14 @@
                 if (!input) return true;
                 let valid = true;
                 if (input.hasAttribute('required') && !input.value.trim()) valid = false;
-                if (input.type === 'email' && input.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) valid =
-                    false;
+                if (input.type === 'email' && input.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) valid = false;
                 field.classList.toggle('invalid', !valid);
                 return valid;
             }
 
-            form.addEventListener('submit', e => {
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
+
                 let allValid = true;
                 $$('.field', form).forEach(f => {
                     if (!validateField(f)) allValid = false;
@@ -2122,12 +2122,14 @@
                 btn.innerHTML = 'Sending…';
                 btn.disabled = true;
 
+                // Collect form data
                 const data = new FormData(form);
                 const payload = Object.fromEntries(data.entries());
 
-                // Your live Formspree endpoint
+                // Your Formspree endpoint
                 const endpoint = 'https://formspree.io/f/55986e8e-7ec0-4214-8ca2-f9ee1810c99f';
 
+                // Try fetch first
                 fetch(endpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -2138,11 +2140,25 @@
                             form.style.display = 'none';
                             $('#formSuccess').classList.add('show');
                         } else {
-                            throw new Error('Network response was not ok');
+                            throw new Error('Formspree rejected');
                         }
                     })
                     .catch(() => {
-                        alert('Something went wrong. Please email us directly at pintukhankhan405@gmail.com');
+                        // ---- FALLBACK: Open email client with the data ----
+                        const subject = encodeURIComponent('MIMIC Simulator Suite - Contact Request');
+                        const body = encodeURIComponent(
+                            `Name: ${payload.name || ''}\n` +
+                            `Email: ${payload.email || ''}\n` +
+                            `Company: ${payload.company || ''}\n` +
+                            `Interest: ${payload.interest || ''}\n` +
+                            `Message: ${payload.message || ''}`
+                        );
+                        const mailto = `mailto:pintukhankhan405@gmail.com?subject=${subject}&body=${body}`;
+                        window.location.href = mailto;
+
+                        alert('We couldn\'t send your request automatically.\n' +
+                            'Your email app will open so you can send it manually.\n' +
+                            'Please tap "Send" in your email app.');
                     })
                     .finally(() => {
                         btn.innerHTML = originalText;
@@ -2241,5 +2257,6 @@
             }]
         }
     </script>
+
 </body>
 </html>
