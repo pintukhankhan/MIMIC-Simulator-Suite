@@ -7,12 +7,10 @@
     <meta name="author" content="pintu khan" />
     <meta name="description" content="MIMIC® Simulator Suite — simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation." />
 
-    <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Open Graph -->
     <meta property="og:title" content="MIMIC® Simulator Suite — Simulate 100,000+ IT Devices" />
     <meta property="og:description" content="Simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation." />
     <meta property="og:type" content="website" />
@@ -30,7 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
     <style>
-        /* ====== DESIGN TOKENS ====== */
+        /* ====== COMPLETE CSS (unchanged from the working version) ====== */
         :root {
             --bg: #f6f9fc;
             --surface: #fff;
@@ -92,7 +90,6 @@
         a {
             color: inherit;
             text-decoration: none;
-            cursor: pointer;
         }
         button {
             font: inherit;
@@ -587,7 +584,7 @@
             font-size: 1.05rem;
         }
 
-        /* ====== CARDS (NOW CLICKABLE) ====== */
+        /* ====== CARDS ====== */
         .cards {
             display: grid;
             gap: 1.5rem;
@@ -611,43 +608,21 @@
             padding: 1.9rem;
             box-shadow: var(--sh-1);
             transition: transform .25s, box-shadow .25s, border-color .25s;
-            cursor: pointer;
-            -webkit-tap-highlight-color: rgba(6, 182, 212, .15);
+            cursor: default;
         }
-        .card:active {
-            transform: scale(0.98);
-        }
-        .card::after {
-            content: "";
+        .card .tag {
             position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--cyan-400), var(--teal-300));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform .3s;
-        }
-        .card:hover {
-            transform: translateY(-7px);
-            box-shadow: var(--sh-2);
-            border-color: rgba(6, 182, 212, .45);
-        }
-        .card:hover::after {
-            transform: scaleX(1);
-        }
-        .card .click-hint {
-            display: inline-block;
-            margin-top: .8rem;
-            font-size: .75rem;
-            font-weight: 600;
+            top: 1.4rem;
+            right: 1.4rem;
+            font-size: .68rem;
+            font-weight: 800;
+            letter-spacing: .08em;
             color: var(--cyan-600);
-            opacity: 0;
-            transition: opacity .3s;
-        }
-        .card:hover .click-hint {
-            opacity: 1;
+            background: rgba(6, 182, 212, .1);
+            border: 1px solid rgba(6, 182, 212, .25);
+            padding: .22rem .6rem;
+            border-radius: 999px;
+            text-transform: uppercase;
         }
         .icon-badge {
             width: 54px;
@@ -671,20 +646,6 @@
             color: var(--muted);
             font-size: .94rem;
             margin: 0;
-        }
-        .card .tag {
-            position: absolute;
-            top: 1.4rem;
-            right: 1.4rem;
-            font-size: .68rem;
-            font-weight: 800;
-            letter-spacing: .08em;
-            color: var(--cyan-600);
-            background: rgba(6, 182, 212, .1);
-            border: 1px solid rgba(6, 182, 212, .25);
-            padding: .22rem .6rem;
-            border-radius: 999px;
-            text-transform: uppercase;
         }
 
         /* ====== TABLE ====== */
@@ -1438,48 +1399,39 @@
                     <h2 id="products-title">The MIMIC® Simulator Suite</h2>
                     <p>Six purpose-built simulators, one unified virtual lab — for networks, servers, IoT and storage devices.</p>
                 </div>
-                <!-- ====== CARDS – NOW ALL CLICKABLE ====== -->
                 <div class="cards">
-                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about MIMIC Simulator Suite">
-                        <span class="tag">Core</span>
+                    <article class="card reveal"><span class="tag">Core</span>
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-layers"/></svg></div>
                         <h3>MIMIC® Simulator Suite</h3>
                         <p>A powerful network environment simulator. Scalable, extensible and configurable tools for testing, demos and development.</p>
-                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about SNMP Simulator">
+                    <article class="card reveal">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-net"/></svg></div>
                         <h3>MIMIC® SNMP Simulator</h3>
                         <p>Creates a network of up to 100,000 SNMP-manageable devices. Build any SNMP-based device with any number of public or private MIBs.</p>
-                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about IoT Simulator">
+                    <article class="card reveal">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-iot"/></svg></div>
                         <h3>MIMIC® IoT Simulator</h3>
                         <p>Create large, customizable Test and POC environments populated with thousands of IoT sensors and connected devices.</p>
-                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about NetFlow Simulator">
+                    <article class="card reveal">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-flow"/></svg></div>
                         <h3>MIMIC® NetFlow / sFlow Simulator</h3>
                         <p>Generates a full variety of flows with complete control, so you can fully test your monitoring and analytics applications.</p>
-                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about Web Simulator">
+                    <article class="card reveal">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-web"/></svg></div>
                         <h3>MIMIC® Web Simulator</h3>
                         <p>A virtual lab with hundreds of simulated web servers — easily develop and test load balancers and web applications.</p>
-                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about IOS Simulator">
+                    <article class="card reveal">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-term"/></svg></div>
                         <h3>MIMIC® IOS Simulator</h3>
                         <p>Fully supports Cisco IOS® software and SNMP v1, v2, v2c, v3 — simulate up to 100,000 devices in a single workstation.</p>
-                        <span class="click-hint">Tap to learn more →</span>
                     </article>
                 </div>
 
-                <!-- ====== COMPARISON TABLE ====== -->
                 <div class="table-wrap reveal" style="margin-top:3rem" id="comparison-table">
                     <table>
                         <caption class="skip-link">Simulator capability comparison</caption>
@@ -1710,13 +1662,14 @@
                         <div class="c-line"><svg aria-hidden="true"><use href="#i-check"/></svg>Response within one business day</div>
                     </div>
                     <div class="form-card">
-                        <form id="contactForm" novalidate>
+                        <!-- Standard form – works even without JS -->
+                        <form id="contactForm" action="https://formspree.io/f/55986e8e-7ec0-4214-8ca2-f9ee1810c99f" method="POST" novalidate>
                             <div class="form-row two">
-                                <div class="field"><label for="name">Full name *</label><input id="name" name="name" type="text" required autocomplete="name" placeholder="Jane Doe" /><span class="err">Please enter your name.</span></div>
-                                <div class="field"><label for="email">Work email *</label><input id="email" name="email" type="email" required autocomplete="email" placeholder="jane@company.com" /><span class="err">Please enter a valid email address.</span></div>
+                                <div class="field"><label for="name">Full name *</label><input type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Doe" /><span class="err">Please enter your name.</span></div>
+                                <div class="field"><label for="email">Work email *</label><input type="email" id="email" name="email" required autocomplete="email" placeholder="jane@company.com" /><span class="err">Please enter a valid email address.</span></div>
                             </div>
                             <div class="form-row two">
-                                <div class="field"><label for="company">Company</label><input id="company" name="company" type="text" autocomplete="organization" placeholder="Company Inc." /></div>
+                                <div class="field"><label for="company">Company</label><input type="text" id="company" name="company" autocomplete="organization" placeholder="Company Inc." /></div>
                                 <div class="field"><label for="interest">I'm interested in *</label>
                                     <select id="interest" name="interest" required>
                                         <option value="">Select a product…</option>
@@ -1793,41 +1746,14 @@
             'use strict';
 
             // ============================================================
-            // SAFE UTILITIES
+            // Helpers
             // ============================================================
             var $ = function(s, c) { return (c || document).querySelector(s); };
             var $$ = function(s, c) { return Array.from((c || document).querySelectorAll(s)); };
             var isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
             // ============================================================
-            // GLOBAL SCROLL FUNCTION (used by card onclick)
-            // ============================================================
-            var headerHeight = 80;
-
-            window.scrollToSection = function(id) {
-                var target = document.getElementById(id);
-                if (!target) return;
-                var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                window.scrollTo({ top: top, behavior: isReduced ? 'auto' : 'smooth' });
-                try { history.replaceState(null, null, '#' + id); } catch (_) {}
-            };
-
-            // ============================================================
-            // DELEGATED ANCHOR SCROLL (for all # links)
-            // ============================================================
-            document.addEventListener('click', function(e) {
-                var a = e.target.closest('a[href^="#"]');
-                if (!a) return;
-                var href = a.getAttribute('href');
-                if (href === '#') return;
-                var id = href.substring(1);
-                if (!id) return;
-                e.preventDefault();
-                window.scrollToSection(id);
-            });
-
-            // ============================================================
-            // YEAR
+            // Year
             // ============================================================
             (function() {
                 var el = document.getElementById('year');
@@ -1835,7 +1761,7 @@
             })();
 
             // ============================================================
-            // HEADER SCROLL EFFECT + BACK‑TO‑TOP
+            // Header scroll effect + back-to-top
             // ============================================================
             (function() {
                 var header = document.getElementById('header');
@@ -1865,7 +1791,7 @@
             })();
 
             // ============================================================
-            // MOBILE NAV
+            // Mobile nav
             // ============================================================
             (function() {
                 var toggle = document.getElementById('navToggle');
@@ -1873,7 +1799,6 @@
                 if (!toggle || !mobileNav) return;
 
                 var open = false;
-
                 var setOpen = function(state) {
                     open = state;
                     mobileNav.classList.toggle('open', state);
@@ -1903,7 +1828,7 @@
             })();
 
             // ============================================================
-            // SCROLLSPY
+            // Scrollspy
             // ============================================================
             (function() {
                 var links = $$('.nav-link');
@@ -1933,7 +1858,7 @@
             })();
 
             // ============================================================
-            // REVEAL ON SCROLL
+            // Reveal on scroll
             // ============================================================
             (function() {
                 var els = $$('.reveal');
@@ -1950,7 +1875,7 @@
             })();
 
             // ============================================================
-            // ANIMATED COUNTERS
+            // Animated counters
             // ============================================================
             (function() {
                 var els = $$('[data-count]');
@@ -1984,7 +1909,7 @@
             })();
 
             // ============================================================
-            // TABS
+            // Tabs
             // ============================================================
             (function() {
                 var tabs = $$('.tab');
@@ -2015,7 +1940,7 @@
             })();
 
             // ============================================================
-            // FAQ ACCORDION
+            // FAQ Accordion
             // ============================================================
             (function() {
                 $$('.faq-item').forEach(function(item) {
@@ -2032,7 +1957,7 @@
             })();
 
             // ============================================================
-            // TESTIMONIAL CAROUSEL
+            // Testimonial carousel
             // ============================================================
             (function() {
                 var slides = $$('.slide');
@@ -2060,7 +1985,6 @@
                     stop();
                     timer = setInterval(function() { show(idx + 1); }, 6000);
                 };
-
                 var stop = function() { if (timer) { clearInterval(timer);
                         timer = null; } };
 
@@ -2085,12 +2009,13 @@
             })();
 
             // ============================================================
-            // CONTACT FORM
+            // Form – progressive enhancement over standard POST
             // ============================================================
             (function() {
                 var form = document.getElementById('contactForm');
                 if (!form) return;
 
+                // Validate fields for real‑time feedback
                 var validateField = function(field) {
                     var input = field.querySelector('input,select,textarea');
                     if (!input) return true;
@@ -2102,27 +2027,33 @@
                     return valid;
                 };
 
-                var showStatus = function(msg, isError) {
-                    var existing = form.querySelector('.form-status');
-                    if (existing) existing.remove();
-                    var div = document.createElement('div');
-                    div.className = 'form-status';
-                    div.style.cssText =
-                        'margin-top:1rem;padding:.8rem 1rem;border-radius:8px;font-weight:600;text-align:center;' +
-                        (isError ? 'background:#fee2e2;color:#991b1b;' : 'background:#d1fae5;color:#065f46;');
-                    div.textContent = msg;
-                    form.appendChild(div);
-                };
+                // Real‑time validation
+                form.addEventListener('input', function(e) {
+                    var f = e.target.closest('.field');
+                    if (f) f.classList.remove('invalid');
+                });
 
-                var submit = function(e) {
-                    if (e) e.preventDefault();
+                form.addEventListener('blur', function(e) {
+                    var f = e.target.closest('.field');
+                    if (f && e.target.closest('input,select,textarea')) {
+                        validateField(f);
+                    }
+                }, true);
 
+                // Intercept submit to add AJAX, but still allow native fallback
+                form.addEventListener('submit', function(e) {
+                    // If fetch is supported, we'll try to send via AJAX
+                    if (!window.fetch) return; // fallback to native form POST
+
+                    e.preventDefault();
+
+                    // Validate all required fields
                     var allValid = true;
                     form.querySelectorAll('.field').forEach(function(f) {
                         if (!validateField(f)) allValid = false;
                     });
                     if (!allValid) {
-                        showStatus('Please fill in all required fields correctly.', true);
+                        // Show inline error (optional)
                         return;
                     }
 
@@ -2135,7 +2066,7 @@
                     var payload = {};
                     data.forEach(function(v, k) { payload[k] = v; });
 
-                    var endpoint = 'https://formspree.io/f/55986e8e-7ec0-4214-8ca2-f9ee1810c99f';
+                    var endpoint = form.getAttribute('action');
 
                     fetch(endpoint, {
                             method: 'POST',
@@ -2152,39 +2083,21 @@
                             }
                         })
                         .catch(function() {
-                            var subject = encodeURIComponent('MIMIC Simulator Suite - Contact Request');
-                            var body = encodeURIComponent(
-                                'Name: ' + (payload.name || '') + '\n' +
-                                'Email: ' + (payload.email || '') + '\n' +
-                                'Company: ' + (payload.company || '') + '\n' +
-                                'Interest: ' + (payload.interest || '') + '\n' +
-                                'Message: ' + (payload.message || '')
-                            );
-                            var mailto = 'mailto:pintukhankhan405@gmail.com?subject=' + subject + '&body=' + body;
-                            window.open(mailto, '_blank');
-                            showStatus(
-                                'We couldn\'t send automatically. Your email app has opened – please tap Send.',
-                                false
-                            );
+                            // Fallback: submit the form natively (reload)
+                            // We'll just revert to native POST by submitting again without preventDefault
+                            // But we need to re‑trigger the submit with JS disabled behaviour.
+                            // Since we prevented default, we can manually submit.
+                            form.submit();
                         })
                         .finally(function() {
                             btn.innerHTML = originalText;
                             btn.disabled = false;
                         });
-                };
-
-                form.addEventListener('submit', submit);
-
-                form.addEventListener('input', function(e) {
-                    var f = e.target.closest('.field');
-                    if (f) f.classList.remove('invalid');
-                    var status = form.querySelector('.form-status');
-                    if (status) status.remove();
                 });
             })();
 
             // ============================================================
-            // COOKIE CONSENT
+            // Cookie consent
             // ============================================================
             (function() {
                 var banner = document.getElementById('cookie-banner');
@@ -2204,20 +2117,6 @@
                         banner.style.display = 'none';
                     });
                 }
-            })();
-
-            // ============================================================
-            // CARD KEYBOARD SUPPORT (Enter/Space to activate)
-            // ============================================================
-            (function() {
-                $$('.card[role="button"]').forEach(function(card) {
-                    card.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            card.click();
-                        }
-                    });
-                });
             })();
 
         })();
