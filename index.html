@@ -344,15 +344,14 @@
     </div>
 
     <!-- ==========================================================
-         SECTION 6: COMPLETE JAVASCRIPT LOGIC (UPDATED URL)
+         SECTION 6: COMPLETE JAVASCRIPT LOGIC (UPDATED URL & ERROR HANDLING)
          ========================================================== -->
     <script>
         // ==========================================
-        // CONFIGURATION BLOCK - NEW URL UPDATED HERE
+        // CONFIGURATION BLOCK - LATEST URL
         // ==========================================
         const CONFIG = {
-            // Updated to the NEW Web App URL from your screenshot
-            scriptUrl: "https://script.google.com/macros/s/AKfycbxu8Z3lkSRQJMNULcewGs17CCWM1MBtGQvPYMA_9egVqoVoTyU1w6k3DHT8BppuzqF7GA/exec",
+            scriptUrl: "https://script.google.com/macros/s/AKfycbx3dOE-9abDXz300HwMWkhtIrTwlFXoIGcoSF3G6w_4mAqC77pGdRQOKSTy1ZnsGVGN8w/exec",
             secretKey: "MyStrongSecret123" // Must match the exact secret in your Apps Script
         };
 
@@ -429,6 +428,11 @@
                     })
                 });
 
+                // Check if Google gave a hard error (like 404 or 500)
+                if (!response.ok) {
+                    throw new Error(`Server Error (HTTP ${response.status})`);
+                }
+
                 // Parse the JSON response from the server
                 const result = await response.json();
 
@@ -445,18 +449,19 @@
                     document.getElementById('otpInput').value = AppState.currentOtp;
 
                     // Delay for 1.5 seconds, then automatically trigger the Verify button
-                    // This completes the "Auto-Verification" pipeline
                     setTimeout(() => {
                         handleVerifyOtp();
                     }, 1500);
 
                 } else {
-                    setStatusMessage("❌ Server error: Unable to send OTP. Please try again later.", "error");
+                    // If the script returns a custom error, show it exactly
+                    setStatusMessage("❌ Error: " + (result.msg || "Unknown server error."), "error");
                 }
 
             } catch (error) {
-                console.error("Network Error:", error);
-                setStatusMessage("❌ Network Error! Check your internet connection or Script URL.", "error");
+                console.error("Real Error:", error);
+                // Now the red box will show the EXACT error instead of "Network Error"
+                setStatusMessage("❌ " + error.message, "error");
             } finally {
                 // Stop the loading spinner
                 toggleButtonLoading('sendOtpButton', false);
@@ -504,17 +509,12 @@
         function openDemoBook() {
             // Opens the Demo Book section
             alert("✅ SUCCESS: Demo Book opened successfully!\n\nAll MIMIC Simulator buttons are now active and working.");
-            
-            // Optional: Redirect to a specific part of the page
             window.location.href = "#top";
         }
 
         function simAction(actionName) {
-            // Placeholder for actual simulator logic
-            // For demonstration, this alerts the user that the button works
             const timestamp = new Date().toLocaleTimeString();
             console.log(`[${timestamp}] User executed: ${actionName}`);
-            
             alert(`⚙️ SIMULATOR EXECUTION:\nCommand: "${actionName}"\nStatus: Successfully triggered\nTimestamp: ${timestamp}`);
         }
 
