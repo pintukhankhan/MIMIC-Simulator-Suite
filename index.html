@@ -92,6 +92,7 @@
         a {
             color: inherit;
             text-decoration: none;
+            cursor: pointer;
         }
         button {
             font: inherit;
@@ -586,7 +587,7 @@
             font-size: 1.05rem;
         }
 
-        /* ====== CARDS ====== */
+        /* ====== CARDS (NOW CLICKABLE) ====== */
         .cards {
             display: grid;
             gap: 1.5rem;
@@ -610,6 +611,11 @@
             padding: 1.9rem;
             box-shadow: var(--sh-1);
             transition: transform .25s, box-shadow .25s, border-color .25s;
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(6, 182, 212, .15);
+        }
+        .card:active {
+            transform: scale(0.98);
         }
         .card::after {
             content: "";
@@ -630,6 +636,18 @@
         }
         .card:hover::after {
             transform: scaleX(1);
+        }
+        .card .click-hint {
+            display: inline-block;
+            margin-top: .8rem;
+            font-size: .75rem;
+            font-weight: 600;
+            color: var(--cyan-600);
+            opacity: 0;
+            transition: opacity .3s;
+        }
+        .card:hover .click-hint {
+            opacity: 1;
         }
         .icon-badge {
             width: 54px;
@@ -1420,40 +1438,49 @@
                     <h2 id="products-title">The MIMIC® Simulator Suite</h2>
                     <p>Six purpose-built simulators, one unified virtual lab — for networks, servers, IoT and storage devices.</p>
                 </div>
+                <!-- ====== CARDS – NOW ALL CLICKABLE ====== -->
                 <div class="cards">
-                    <article class="card reveal"><span class="tag">Core</span>
+                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about MIMIC Simulator Suite">
+                        <span class="tag">Core</span>
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-layers"/></svg></div>
                         <h3>MIMIC® Simulator Suite</h3>
                         <p>A powerful network environment simulator. Scalable, extensible and configurable tools for testing, demos and development.</p>
+                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal">
+                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about SNMP Simulator">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-net"/></svg></div>
                         <h3>MIMIC® SNMP Simulator</h3>
                         <p>Creates a network of up to 100,000 SNMP-manageable devices. Build any SNMP-based device with any number of public or private MIBs.</p>
+                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal">
+                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about IoT Simulator">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-iot"/></svg></div>
                         <h3>MIMIC® IoT Simulator</h3>
                         <p>Create large, customizable Test and POC environments populated with thousands of IoT sensors and connected devices.</p>
+                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal">
+                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about NetFlow Simulator">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-flow"/></svg></div>
                         <h3>MIMIC® NetFlow / sFlow Simulator</h3>
                         <p>Generates a full variety of flows with complete control, so you can fully test your monitoring and analytics applications.</p>
+                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal">
+                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about Web Simulator">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-web"/></svg></div>
                         <h3>MIMIC® Web Simulator</h3>
                         <p>A virtual lab with hundreds of simulated web servers — easily develop and test load balancers and web applications.</p>
+                        <span class="click-hint">Tap to learn more →</span>
                     </article>
-                    <article class="card reveal">
+                    <article class="card reveal" onclick="scrollToSection('products'); return false;" role="button" tabindex="0" aria-label="Learn more about IOS Simulator">
                         <div class="icon-badge"><svg aria-hidden="true"><use href="#i-term"/></svg></div>
                         <h3>MIMIC® IOS Simulator</h3>
                         <p>Fully supports Cisco IOS® software and SNMP v1, v2, v2c, v3 — simulate up to 100,000 devices in a single workstation.</p>
+                        <span class="click-hint">Tap to learn more →</span>
                     </article>
                 </div>
 
-                <div class="table-wrap reveal" style="margin-top:3rem">
+                <!-- ====== COMPARISON TABLE ====== -->
+                <div class="table-wrap reveal" style="margin-top:3rem" id="comparison-table">
                     <table>
                         <caption class="skip-link">Simulator capability comparison</caption>
                         <thead>
@@ -1461,13 +1488,13 @@
                         </thead>
                         <tbody>
                             <tr><td>Up to 100,000 devices per node</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                            <tr><td>SNMP v1 / v2c / v3 agents</td><td class="tick">✓</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td></tr>
+                            <tr><td>SNMP v1 / v2c / v3 agents</td><td class="tick">✓</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
                             <tr><td>Cisco IOS® CLI emulation</td><td class="dash">—</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-                            <tr><td>MIB Wizard — compile any MIB</td><td class="tick">✓</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td></tr>
-                            <tr><td>NetFlow / sFlow / IPFIX export</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="dash">—</td></tr>
-                            <tr><td>HTTP / REST / SOAP / XML</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="dash">—</td><td class="tick">✓</td></tr>
-                            <tr><td>IPMI / Redfish server interfaces</td><td class="tick">✓</td><td class="dash">—</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td></tr>
-                            <tr><td>Custom IoT sensor profiles</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td></tr>
+                            <tr><td>MIB Wizard — compile any MIB</td><td class="tick">✓</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
+                            <tr><td>NetFlow / sFlow / IPFIX export</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                            <tr><td>HTTP / REST / SOAP / XML</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                            <tr><td>IPMI / Redfish server interfaces</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
+                            <tr><td>Custom IoT sensor profiles</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1760,7 +1787,7 @@
         <button id="cookie-accept" style="background:var(--cyan-500);color:#fff;padding:.5rem 1.4rem;border-radius:8px;font-weight:700;border:0;cursor:pointer;">Accept</button>
     </div>
 
-    <!-- ====== JAVASCRIPT – fully isolated, no inline onclick, error‑proof ====== -->
+    <!-- ====== JAVASCRIPT ====== -->
     <script>
         (function() {
             'use strict';
@@ -1771,6 +1798,33 @@
             var $ = function(s, c) { return (c || document).querySelector(s); };
             var $$ = function(s, c) { return Array.from((c || document).querySelectorAll(s)); };
             var isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // ============================================================
+            // GLOBAL SCROLL FUNCTION (used by card onclick)
+            // ============================================================
+            var headerHeight = 80;
+
+            window.scrollToSection = function(id) {
+                var target = document.getElementById(id);
+                if (!target) return;
+                var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({ top: top, behavior: isReduced ? 'auto' : 'smooth' });
+                try { history.replaceState(null, null, '#' + id); } catch (_) {}
+            };
+
+            // ============================================================
+            // DELEGATED ANCHOR SCROLL (for all # links)
+            // ============================================================
+            document.addEventListener('click', function(e) {
+                var a = e.target.closest('a[href^="#"]');
+                if (!a) return;
+                var href = a.getAttribute('href');
+                if (href === '#') return;
+                var id = href.substring(1);
+                if (!id) return;
+                e.preventDefault();
+                window.scrollToSection(id);
+            });
 
             // ============================================================
             // YEAR
@@ -1831,7 +1885,6 @@
                     setOpen(!open);
                 });
 
-                // Close on outside click
                 document.addEventListener('click', function(e) {
                     if (!open) return;
                     if (!mobileNav.contains(e.target) && !toggle.contains(e.target)) {
@@ -1839,12 +1892,10 @@
                     }
                 });
 
-                // Close on Escape
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape' && open) setOpen(false);
                 });
 
-                // Close on any mobile nav link click
                 mobileNav.addEventListener('click', function(e) {
                     var a = e.target.closest('a');
                     if (a) setOpen(false);
@@ -1852,34 +1903,7 @@
             })();
 
             // ============================================================
-            // DELEGATED ANCHOR SCROLL (one listener for all # links)
-            // ============================================================
-            (function() {
-                var headerHeight = 80;
-
-                var scrollToElement = function(id) {
-                    if (!id) return;
-                    var target = document.getElementById(id);
-                    if (!target) return;
-                    var top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    window.scrollTo({ top: top, behavior: isReduced ? 'auto' : 'smooth' });
-                    try { history.replaceState(null, null, '#' + id); } catch (_) {}
-                };
-
-                document.addEventListener('click', function(e) {
-                    var a = e.target.closest('a[href^="#"]');
-                    if (!a) return;
-                    var href = a.getAttribute('href');
-                    if (href === '#') return;
-                    var id = href.substring(1);
-                    if (!id) return;
-                    e.preventDefault();
-                    scrollToElement(id);
-                });
-            })();
-
-            // ============================================================
-            // SCROLLSPY (uses actual hash IDs)
+            // SCROLLSPY
             // ============================================================
             (function() {
                 var links = $$('.nav-link');
@@ -2061,7 +2085,7 @@
             })();
 
             // ============================================================
-            // CONTACT FORM – fully debugged
+            // CONTACT FORM
             // ============================================================
             (function() {
                 var form = document.getElementById('contactForm');
@@ -2093,7 +2117,6 @@
                 var submit = function(e) {
                     if (e) e.preventDefault();
 
-                    // Validate all fields
                     var allValid = true;
                     form.querySelectorAll('.field').forEach(function(f) {
                         if (!validateField(f)) allValid = false;
@@ -2129,7 +2152,6 @@
                             }
                         })
                         .catch(function() {
-                            // Fallback: mailto link (no blocking alert)
                             var subject = encodeURIComponent('MIMIC Simulator Suite - Contact Request');
                             var body = encodeURIComponent(
                                 'Name: ' + (payload.name || '') + '\n' +
@@ -2139,7 +2161,6 @@
                                 'Message: ' + (payload.message || '')
                             );
                             var mailto = 'mailto:pintukhankhan405@gmail.com?subject=' + subject + '&body=' + body;
-                            // Open in new tab so the form stays visible
                             window.open(mailto, '_blank');
                             showStatus(
                                 'We couldn\'t send automatically. Your email app has opened – please tap Send.',
@@ -2154,21 +2175,16 @@
 
                 form.addEventListener('submit', submit);
 
-                // Real‑time validation (remove error state on input)
                 form.addEventListener('input', function(e) {
                     var f = e.target.closest('.field');
                     if (f) f.classList.remove('invalid');
-                });
-
-                // Remove status message when user starts typing again
-                form.addEventListener('input', function() {
                     var status = form.querySelector('.form-status');
                     if (status) status.remove();
                 });
             })();
 
             // ============================================================
-            // COOKIE CONSENT (safe storage)
+            // COOKIE CONSENT
             // ============================================================
             (function() {
                 var banner = document.getElementById('cookie-banner');
@@ -2188,6 +2204,20 @@
                         banner.style.display = 'none';
                     });
                 }
+            })();
+
+            // ============================================================
+            // CARD KEYBOARD SUPPORT (Enter/Space to activate)
+            // ============================================================
+            (function() {
+                $$('.card[role="button"]').forEach(function(card) {
+                    card.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            card.click();
+                        }
+                    });
+                });
             })();
 
         })();
