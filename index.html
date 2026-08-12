@@ -1,2151 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a192f" />
-    <meta name="author" content="pintu khan" />
-    <meta name="description" content="MIMIC® Simulator Suite — simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation." />
-
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
-    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-    <meta property="og:title" content="MIMIC® Simulator Suite — Simulate 100,000+ IT Devices" />
-    <meta property="og:description" content="Simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.gambitcomm.com/" />
-    <meta property="og:image" content="https://www.gambitcomm.com/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="MIMIC® Simulator Suite — Simulate 100,000+ IT Devices" />
-
-    <title>MIMIC® Simulator Suite — Simulate 100,000+ IT Devices</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MIMIC Simulator Suite - Automated OTP Login and Simulation Dashboard">
+    <title>MIMIC Simulator Suite Pro</title>
+    
+    <!-- Google Font for a premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* ====== COMPLETE CSS (unchanged from the working version) ====== */
+        /* ==========================================
+           SECTION 1: CSS VARIABLES & RESET
+           ========================================== */
         :root {
-            --bg: #f6f9fc;
-            --surface: #fff;
-            --ink: #0b1b33;
-            --muted: #5b6b83;
-            --line: #e2e8f0;
-            --navy-950: #04101f;
-            --navy-900: #0a192f;
-            --navy-800: #112240;
-            --navy-700: #16305c;
-            --cyan-300: #67e8f9;
-            --cyan-400: #22d3ee;
-            --cyan-500: #06b6d4;
-            --cyan-600: #0891b2;
-            --teal-300: #5eead4;
-            --ring: 0 0 0 3px rgba(34, 211, 238, .30);
-            --r: 16px;
-            --header-h: 72px;
-            --container: 1200px;
-            --sh-1: 0 1px 2px rgba(4, 16, 31, .06), 0 8px 24px rgba(4, 16, 31, .08);
-            --sh-2: 0 14px 34px rgba(4, 16, 31, .16);
-            --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.3s;
         }
-        *,
-        *::before,
-        *::after {
+
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
         }
-        html {
-            scroll-behavior: smooth;
-        }
+
         body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--ink);
-            line-height: 1.65;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-        img,
-        svg {
-            display: block;
-            max-width: 100%;
-        }
-        h1,
-        h2,
-        h3,
-        h4 {
-            margin: 0 0 .5em;
-            line-height: 1.15;
-            letter-spacing: -.02em;
-            font-weight: 700;
-        }
-        p {
-            margin: 0 0 1em;
-        }
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-        button {
-            font: inherit;
-            border: 0;
-            background: none;
-            color: inherit;
-            cursor: pointer;
-        }
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        :focus-visible {
-            outline: 3px solid var(--cyan-400);
-            outline-offset: 2px;
-            border-radius: 6px;
-        }
-        .container {
-            width: min(100% - 2.5rem, var(--container));
-            margin-inline: auto;
-        }
-        section {
-            scroll-margin-top: calc(var(--header-h) + 14px);
-        }
-        .skip-link {
-            position: absolute;
-            left: -999px;
-            top: 0;
-            background: var(--cyan-500);
-            color: #fff;
-            padding: .7rem 1.2rem;
-            border-radius: 0 0 10px 0;
-            z-index: 200;
-            font-weight: 600;
-        }
-        .skip-link:focus {
-            left: 0;
-        }
-
-        /* ====== HEADER ====== */
-        .site-header {
-            position: fixed;
-            inset: 0 0 auto 0;
-            height: var(--header-h);
-            z-index: 100;
-            background: rgba(10, 25, 47, .82);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(103, 232, 249, .12);
-            transition: box-shadow .3s, background .3s;
-        }
-        .site-header.scrolled {
-            background: rgba(10, 25, 47, .97);
-            box-shadow: 0 8px 24px rgba(4, 16, 31, .35);
-        }
-        .header-inner {
-            height: var(--header-h);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-        }
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: .65rem;
-            color: #fff;
-            font-weight: 800;
-            font-size: 1.15rem;
-            letter-spacing: -.01em;
-        }
-        .brand-mark {
-            width: 38px;
-            height: 38px;
-            border-radius: 11px;
-            background: linear-gradient(135deg, var(--cyan-500), var(--navy-700));
-            display: grid;
-            place-items: center;
-            color: #e0fbff;
-            box-shadow: 0 4px 14px rgba(6, 182, 212, .4);
-        }
-        .brand-mark svg {
-            width: 20px;
-            height: 20px;
-        }
-        .brand sup {
-            font-size: .6em;
-            color: var(--cyan-300);
-        }
-        .desktop-nav {
-            display: none;
-            align-items: center;
-            gap: 1.6rem;
-        }
-        .nav-link {
-            color: #c3d0e0;
-            font-weight: 600;
-            font-size: .92rem;
-            padding: .4rem 0;
-            border-bottom: 2px solid transparent;
-            transition: color .2s, border-color .2s;
-        }
-        .nav-link:hover {
-            color: #fff;
-        }
-        .nav-link.active {
-            color: var(--cyan-300);
-            border-color: var(--cyan-400);
-        }
-        .nav-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            padding: .6rem 1.2rem;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--cyan-500), var(--cyan-600));
-            color: #fff;
-            font-weight: 700;
-            font-size: .9rem;
-            box-shadow: 0 6px 18px rgba(8, 145, 178, .4);
-            transition: transform .2s, box-shadow .2s;
-        }
-        .nav-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(8, 145, 178, .5);
-        }
-        .nav-toggle {
-            display: grid;
-            place-items: center;
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
-            color: #e2e8f0;
-            border: 1px solid rgba(255, 255, 255, .18);
-            background: transparent;
-        }
-        .nav-toggle svg {
-            width: 22px;
-            height: 22px;
-        }
-        .nav-toggle .i-close {
-            display: none;
-        }
-        .nav-toggle[aria-expanded="true"] .i-close {
-            display: block;
-        }
-        .nav-toggle[aria-expanded="true"] .i-menu {
-            display: none;
-        }
-        .mobile-nav {
-            position: fixed;
-            top: var(--header-h);
-            left: 0;
-            right: 0;
-            z-index: 99;
-            background: rgba(10, 25, 47, .98);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: none;
             flex-direction: column;
-            padding: 1rem 1.4rem 1.4rem;
-        }
-        .mobile-nav.open {
-            display: flex;
-        }
-        .mobile-nav a {
-            padding: .9rem .4rem;
-            color: #e2e8f0;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(255, 255, 255, .07);
-        }
-        .mobile-nav a:last-child {
-            border: 0;
-            color: var(--cyan-300);
-        }
-        @media(min-width:920px) {
-            .desktop-nav {
-                display: flex;
-            }
-            .nav-toggle,
-            .mobile-nav {
-                display: none !important;
-            }
-        }
-
-        /* ====== BUTTONS ====== */
-        .btn {
-            display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: .55rem;
-            padding: .9rem 1.7rem;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: .98rem;
-            transition: transform .2s, box-shadow .2s;
-            border: 1px solid transparent;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--cyan-500), var(--cyan-600));
-            color: #fff;
-            box-shadow: 0 10px 24px rgba(8, 145, 178, .35);
-        }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 16px 32px rgba(8, 145, 178, .45);
-        }
-        .btn-ghost {
-            border-color: rgba(255, 255, 255, .28);
-            color: #e6f1ff;
-        }
-        .btn-ghost:hover {
-            border-color: var(--cyan-400);
-            color: var(--cyan-300);
-            transform: translateY(-3px);
-        }
-        .btn svg {
-            width: 18px;
-            height: 18px;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        /* ====== HERO ====== */
-        .hero {
-            position: relative;
-            overflow: hidden;
-            color: #e6f1ff;
-            background:
-                radial-gradient(1100px 560px at 82% -10%, rgba(6, 182, 212, .20), transparent 60%),
-                radial-gradient(900px 520px at 8% 112%, rgba(6, 182, 212, .14), transparent 60%),
-                linear-gradient(180deg, var(--navy-950), var(--navy-900));
-            padding: calc(var(--header-h) + 4.5rem) 0 5rem;
-        }
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(103, 232, 249, .05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(103, 232, 249, .05) 1px, transparent 1px);
-            background-size: 44px 44px;
-            mask-image: radial-gradient(70% 70% at 50% 40%, #000 30%, transparent 100%);
-            -webkit-mask-image: radial-gradient(70% 70% at 50% 40%, #000 30%, transparent 100%);
-            pointer-events: none;
-        }
-        .hero-grid {
-            display: grid;
-            gap: 3.2rem;
-            align-items: center;
-        }
-        @media(min-width:980px) {
-            .hero-grid {
-                grid-template-columns: 1.05fr .95fr;
-            }
-        }
-        .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: .5rem;
-            padding: .42rem .95rem;
-            border-radius: 999px;
-            background: rgba(34, 211, 238, .10);
-            border: 1px solid rgba(34, 211, 238, .35);
-            color: var(--cyan-300);
-            font-size: .76rem;
-            font-weight: 700;
-            letter-spacing: .1em;
-            text-transform: uppercase;
-            margin-bottom: 1.4rem;
-        }
-        .eyebrow .pulse-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--teal-300);
-            animation: blink 1.8s infinite;
-        }
-        @keyframes blink {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: .25;
-            }
-        }
-        .hero h1 {
-            font-size: clamp(2.3rem, 5vw, 3.7rem);
-            color: #fff;
-            font-weight: 800;
-        }
-        .grad {
-            background: linear-gradient(90deg, var(--cyan-300), var(--teal-300));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .hero-sub {
-            font-size: 1.08rem;
-            color: #b6c6da;
-            max-width: 34rem;
-            margin-bottom: 2.1rem;
-        }
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .9rem;
-        }
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.4rem;
-            margin-top: 2.4rem;
-            color: #8fa5bd;
-            font-size: .85rem;
-            font-weight: 600;
-        }
-        .hero-meta li {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-        }
-        .hero-meta svg {
-            width: 16px;
-            height: 16px;
-            color: var(--teal-300);
-        }
-        .hero-visual {
-            position: relative;
-        }
-        .hero-visual svg {
+        /* ==========================================
+           SECTION 2: MAIN CONTAINER
+           ========================================== */
+        .app-container {
+            max-width: 480px;
             width: 100%;
-            height: auto;
-        }
-        .ring {
-            fill: none;
-            stroke: rgba(34, 211, 238, .14);
-            stroke-width: 1;
-        }
-        .link-line {
-            stroke: url(#flowGrad);
-            stroke-width: 2;
-            fill: none;
-            stroke-dasharray: 5 9;
-            animation: flow 1.4s linear infinite;
-        }
-        @keyframes flow {
-            to {
-                stroke-dashoffset: -28;
-            }
-        }
-        .node-body {
-            fill: #0e2a4a;
-            stroke: var(--cyan-400);
-            stroke-width: 1.6;
-        }
-        .node-halo {
-            fill: none;
-            stroke: rgba(34, 211, 238, .35);
-            animation: halo 3s ease-in-out infinite;
-            transform-origin: center;
-            transform-box: fill-box;
-        }
-        @keyframes halo {
-            0%,
-            100% {
-                opacity: .35;
-                transform: scale(1);
-            }
-            50% {
-                opacity: .9;
-                transform: scale(1.12);
-            }
-        }
-        .node-icon {
-            color: #7dd3fc;
-        }
-        .node-label {
-            fill: #cbd5e1;
-            font-size: 15px;
-            font-weight: 600;
-            text-anchor: middle;
-            font-family: var(--font);
-        }
-        .core-body {
-            fill: url(#coreGrad);
-            stroke: var(--cyan-300);
-            stroke-width: 1.5;
-            filter: drop-shadow(0 0 18px rgba(34, 211, 238, .55));
-        }
-        .core-label {
-            fill: #eafcff;
-            font-size: 19px;
-            font-weight: 800;
-            text-anchor: middle;
-            font-family: var(--font);
-            letter-spacing: .04em;
-        }
-        .chip {
-            position: absolute;
-            padding: .55rem .95rem;
-            border-radius: 12px;
-            background: rgba(17, 34, 64, .85);
-            border: 1px solid rgba(103, 232, 249, .3);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            color: #d7f5fd;
-            font-size: .8rem;
-            font-weight: 700;
-            box-shadow: var(--sh-2);
-            animation: floaty 6s ease-in-out infinite;
-            pointer-events: none;
-        }
-        .chip b {
-            color: var(--cyan-300);
-        }
-        .chip-1 {
-            top: 4%;
-            right: 2%;
-        }
-        .chip-2 {
-            bottom: 6%;
-            left: 0;
-            animation-delay: -3s;
-        }
-        @keyframes floaty {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-12px);
-            }
-        }
-
-        /* ====== LOGOS ====== */
-        .logos {
-            background: var(--navy-800);
-            border-block: 1px solid rgba(103, 232, 249, .12);
-            padding: 1.6rem 0;
-        }
-        .logos-inner {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 1.2rem 2.6rem;
-            color: #7e93ac;
-        }
-        .logos-label {
-            font-size: .75rem;
-            font-weight: 700;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            color: #5c7189;
-        }
-        .logo-item {
-            font-weight: 800;
-            letter-spacing: .08em;
-            font-size: .95rem;
-            opacity: .75;
-            transition: opacity .2s, color .2s;
-        }
-        .logo-item:hover {
-            opacity: 1;
-            color: var(--cyan-300);
-        }
-
-        /* ====== SECTIONS ====== */
-        .section {
-            padding: 5.5rem 0;
-        }
-        .section-head {
-            max-width: 760px;
-            margin: 0 auto 3.2rem;
-            text-align: center;
-        }
-        .kicker {
-            display: inline-block;
-            color: var(--cyan-600);
-            font-weight: 800;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            font-size: .78rem;
-            margin-bottom: .7rem;
-        }
-        .section-head h2 {
-            font-size: clamp(1.85rem, 3.4vw, 2.7rem);
-        }
-        .section-head p {
-            color: var(--muted);
-            font-size: 1.05rem;
-        }
-
-        /* ====== CARDS ====== */
-        .cards {
-            display: grid;
-            gap: 1.5rem;
-        }
-        @media(min-width:640px) {
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media(min-width:1024px) {
-            .cards {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        .card {
-            position: relative;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
             overflow: hidden;
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            padding: 1.9rem;
-            box-shadow: var(--sh-1);
-            transition: transform .25s, box-shadow .25s, border-color .25s;
-            cursor: default;
-        }
-        .card .tag {
-            position: absolute;
-            top: 1.4rem;
-            right: 1.4rem;
-            font-size: .68rem;
-            font-weight: 800;
-            letter-spacing: .08em;
-            color: var(--cyan-600);
-            background: rgba(6, 182, 212, .1);
-            border: 1px solid rgba(6, 182, 212, .25);
-            padding: .22rem .6rem;
-            border-radius: 999px;
-            text-transform: uppercase;
-        }
-        .icon-badge {
-            width: 54px;
-            height: 54px;
-            border-radius: 14px;
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, var(--navy-900), var(--navy-700));
-            color: var(--cyan-300);
-            margin-bottom: 1.25rem;
-            box-shadow: 0 6px 16px rgba(10, 25, 47, .25);
-        }
-        .icon-badge svg {
-            width: 26px;
-            height: 26px;
-        }
-        .card h3 {
-            font-size: 1.12rem;
-        }
-        .card p {
-            color: var(--muted);
-            font-size: .94rem;
-            margin: 0;
+            padding: 30px 25px;
+            position: relative;
         }
 
-        /* ====== TABLE ====== */
-        .table-wrap {
-            overflow-x: auto;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            background: #fff;
-            box-shadow: var(--sh-1);
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            min-width: 760px;
-        }
-        th,
-        td {
-            padding: .95rem 1.15rem;
+        .app-header {
             text-align: center;
-            border-bottom: 1px solid #eef2f7;
-            font-size: .92rem;
-        }
-        th:first-child,
-        td:first-child {
-            text-align: left;
-            font-weight: 600;
-        }
-        thead th {
-            background: var(--navy-900);
-            color: #e2e8f0;
-            font-weight: 700;
-            font-size: .86rem;
-            letter-spacing: .03em;
-        }
-        tbody tr:last-child td {
-            border-bottom: 0;
-        }
-        tbody tr:hover {
-            background: rgba(6, 182, 212, .05);
-        }
-        .tick {
-            color: var(--cyan-600);
-            font-weight: 800;
-        }
-        .dash {
-            color: #c3cedb;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 20px;
         }
 
-        /* ====== TABS ====== */
-        .tabs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: .55rem;
-            justify-content: center;
-            margin-bottom: 2.6rem;
-        }
-        .tab {
-            padding: .72rem 1.25rem;
-            border-radius: 999px;
-            border: 1px solid #d8e2ef;
-            background: #fff;
-            color: var(--muted);
+        .app-header h1 {
+            font-size: 24px;
             font-weight: 700;
-            font-size: .88rem;
-            transition: .2s;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
         }
-        .tab:hover {
-            border-color: var(--cyan-500);
-            color: var(--cyan-600);
+        
+        .app-header p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-top: 5px;
         }
-        .tab[aria-selected="true"] {
-            background: var(--navy-900);
-            color: #fff;
-            border-color: var(--navy-900);
-            box-shadow: 0 8px 18px rgba(10, 25, 47, .28);
-        }
-        .tabpanel {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            padding: 2.6rem;
-            box-shadow: var(--sh-1);
-            display: grid;
-            gap: 2.4rem;
-            animation: fadeUp .45s ease;
-        }
-        .tabpanel[hidden] {
+
+        /* ==========================================
+           SECTION 3: STEP WIZARD / UI ELEMENTS
+           ========================================== */
+        .step-container {
             display: none;
-        }
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(14px);
-            }
-            to {
-                opacity: 1;
-                transform: none;
-            }
-        }
-        @media(min-width:920px) {
-            .tabpanel {
-                grid-template-columns: 1.1fr .9fr;
-                align-items: center;
-            }
-        }
-        .tabpanel h3 {
-            font-size: 1.5rem;
-        }
-        .tabpanel .lead {
-            color: var(--muted);
-            font-size: 1rem;
-        }
-        .checklist li {
-            display: flex;
-            gap: .65rem;
-            margin: .7rem 0;
-            align-items: flex-start;
-            color: #33475e;
-            font-size: .95rem;
-        }
-        .checklist svg {
-            width: 20px;
-            height: 20px;
-            color: var(--cyan-600);
-            flex-shrink: 0;
-            margin-top: .15rem;
-        }
-        .panel-visual {
-            border-radius: 14px;
-            background: linear-gradient(160deg, var(--navy-900), var(--navy-700));
-            color: #dbe7ff;
-            padding: 2.2rem;
-            text-align: center;
-            box-shadow: var(--sh-2);
-        }
-        .panel-visual .big {
-            font-size: 2.6rem;
-            font-weight: 800;
-            color: var(--cyan-300);
-            line-height: 1;
-        }
-        .panel-visual .lbl {
-            display: block;
-            margin-top: .5rem;
-            font-size: .8rem;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            color: #8fa5bd;
-            font-weight: 700;
-        }
-        .panel-visual svg {
-            width: 44px;
-            height: 44px;
-            margin: 0 auto 1rem;
-            color: var(--teal-300);
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        /* ====== DARK BAND ====== */
-        .dark-band {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(180deg, var(--navy-900), var(--navy-950));
-            color: #dbe7ff;
-        }
-        .dark-band::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(103, 232, 249, .06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(103, 232, 249, .06) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-        }
-        .dark-band .container {
-            position: relative;
-        }
-        .dark-band h2 {
-            color: #fff;
-        }
-        .dark-band .section-head p {
-            color: #9fb3ca;
-        }
-        .spec-grid {
-            display: grid;
-            gap: 1.3rem;
-            grid-template-columns: repeat(2, 1fr);
-        }
-        @media(min-width:1024px) {
-            .spec-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        .spec {
-            background: rgba(17, 34, 64, .72);
-            border: 1px solid rgba(103, 232, 249, .16);
-            border-radius: 14px;
-            padding: 1.6rem;
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            transition: transform .25s, border-color .25s;
-        }
-        .spec:hover {
-            transform: translateY(-5px);
-            border-color: rgba(103, 232, 249, .45);
-        }
-        .spec svg {
-            width: 30px;
-            height: 30px;
-            color: var(--teal-300);
-        }
-        .spec b {
+        .step-container.active {
             display: block;
-            font-size: 1.5rem;
-            color: var(--cyan-300);
-            margin: .8rem 0 .25rem;
-        }
-        .spec p {
-            margin: 0;
-            color: #9fb3ca;
-            font-size: .88rem;
         }
 
-        /* ====== TESTIMONIALS ====== */
-        .carousel {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color var(--transition-speed);
+            outline: none;
+            background: #fcfcfd;
+        }
+
+        .form-input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
             position: relative;
-            max-width: 880px;
-            margin-inline: auto;
         }
-        .slide {
-            opacity: 0;
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            transition: opacity .5s ease;
-        }
-        .slide.active {
-            opacity: 1;
-            position: relative;
-            pointer-events: auto;
-        }
-        .quote-card {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            padding: 2.6rem;
-            box-shadow: var(--sh-1);
-            text-align: center;
-        }
-        .quote-card .qmark {
-            font-size: 3.4rem;
-            line-height: 1;
-            color: var(--cyan-400);
-            font-weight: 800;
-        }
-        .quote-card blockquote {
-            margin: 0 0 1.4rem;
-            font-size: 1.12rem;
-            color: #33475e;
-            font-style: italic;
-        }
-        .quote-card .who {
-            font-weight: 800;
-            color: var(--ink);
-        }
-        .quote-card .role {
-            color: var(--muted);
-            font-size: .88rem;
-        }
-        .car-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1.1rem;
-            margin-top: 1.6rem;
-        }
-        .car-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid #d8e2ef;
-            background: #fff;
-            display: grid;
-            place-items: center;
-            color: var(--navy-800);
-            transition: .2s;
-        }
-        .car-btn:hover {
-            border-color: var(--cyan-500);
-            color: var(--cyan-600);
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-hover);
             transform: translateY(-2px);
         }
-        .car-btn svg {
-            width: 18px;
-            height: 18px;
-        }
-        .dots {
-            display: flex;
-            gap: .5rem;
-        }
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #cdd8e5;
-            transition: .25s;
-            padding: 0;
-        }
-        .dot.active {
-            background: var(--cyan-500);
-            transform: scale(1.25);
-        }
 
-        /* ====== FAQ ====== */
-        .faq {
-            max-width: 820px;
-            margin-inline: auto;
-        }
-        .faq-item {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: 13px;
-            margin-bottom: .85rem;
-            overflow: hidden;
-            transition: .25s;
-        }
-        .faq-item.open {
-            border-color: rgba(6, 182, 212, .45);
-            box-shadow: var(--sh-1);
-        }
-        .faq-q {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.15rem 1.35rem;
-            font-weight: 700;
-            text-align: left;
-            font-size: .98rem;
-            background: transparent;
-            border: 0;
-            color: var(--ink);
-        }
-        .faq-q svg {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            color: var(--cyan-600);
-            transition: transform .3s;
-        }
-        .faq-item.open .faq-q svg {
-            transform: rotate(180deg);
-        }
-        .faq-a {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height .35s ease;
-        }
-        .faq-a-inner {
-            padding: 0 1.35rem 1.25rem;
-            color: var(--muted);
-            font-size: .94rem;
-        }
-
-        /* ====== CONTACT ====== */
-        .contact-grid {
-            display: grid;
-            gap: 2.2rem;
-        }
-        @media(min-width:960px) {
-            .contact-grid {
-                grid-template-columns: .85fr 1.15fr;
-            }
-        }
-        .contact-info {
-            background: linear-gradient(160deg, var(--navy-900), var(--navy-700));
-            color: #dbe7ff;
-            border-radius: var(--r);
-            padding: 2.4rem;
-            box-shadow: var(--sh-2);
-        }
-        .contact-info h3 {
-            color: #fff;
-            font-size: 1.4rem;
-        }
-        .contact-info p {
-            color: #9fb3ca;
-        }
-        .c-line {
-            display: flex;
-            align-items: center;
-            gap: .85rem;
-            margin: 1.05rem 0;
-            font-weight: 600;
-        }
-        .c-line svg {
-            width: 20px;
-            height: 20px;
-            color: var(--teal-300);
-            flex-shrink: 0;
-        }
-        .c-line a:hover {
-            color: var(--cyan-300);
-        }
-        .form-card {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: var(--r);
-            padding: 2.4rem;
-            box-shadow: var(--sh-1);
-        }
-        .form-row {
-            display: grid;
-            gap: 1.1rem;
-        }
-        @media(min-width:640px) {
-            .form-row.two {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        .field {
-            margin-bottom: 1.1rem;
-        }
-        .field label {
-            display: block;
-            font-size: .84rem;
-            font-weight: 700;
-            margin-bottom: .4rem;
-        }
-        .field input,
-        .field select,
-        .field textarea {
-            width: 100%;
-            padding: .82rem 1rem;
-            border: 1px solid #d7e0ec;
-            border-radius: 10px;
-            font: inherit;
-            background: #fbfdff;
-            transition: border-color .2s, box-shadow .2s;
-        }
-        .field :is(input, select, textarea):focus {
-            outline: none;
-            border-color: var(--cyan-500);
-            box-shadow: var(--ring);
-        }
-        .err {
-            display: none;
-            color: #dc2626;
-            font-size: .78rem;
-            margin-top: .35rem;
-            font-weight: 600;
-        }
-        .field.invalid :is(input, select, textarea) {
-            border-color: #dc2626;
-        }
-        .field.invalid .err {
-            display: block;
-        }
-        .form-success {
-            display: none;
-            text-align: center;
-            padding: 2.5rem 1rem;
-        }
-        .form-success.show {
-            display: block;
-        }
-        .form-success .ok {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1.2rem;
-            border-radius: 50%;
-            background: rgba(6, 182, 212, .12);
-            color: var(--cyan-600);
-            display: grid;
-            place-items: center;
-        }
-        .form-success .ok svg {
-            width: 30px;
-            height: 30px;
-        }
-
-        /* ====== FOOTER ====== */
-        .site-footer {
-            background: var(--navy-950);
-            color: #8fa5bd;
-            padding: 4rem 0 2rem;
-            border-top: 1px solid rgba(103, 232, 249, .12);
-        }
-        .footer-grid {
-            display: grid;
-            gap: 2.4rem;
-            margin-bottom: 3rem;
-        }
-        @media(min-width:760px) {
-            .footer-grid {
-                grid-template-columns: 1.4fr 1fr 1fr 1fr;
-            }
-        }
-        .site-footer h4 {
-            color: #fff;
-            font-size: .95rem;
-            letter-spacing: .06em;
-            text-transform: uppercase;
-        }
-        .site-footer li {
-            margin: .55rem 0;
-        }
-        .site-footer a:hover {
-            color: var(--cyan-300);
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, .07);
-            padding-top: 1.6rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: space-between;
-            font-size: .85rem;
-        }
-
-        /* ====== UTILITIES ====== */
-        .to-top {
-            position: fixed;
-            right: 1.4rem;
-            bottom: 1.4rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 13px;
-            background: var(--navy-900);
-            color: var(--cyan-300);
-            display: grid;
-            place-items: center;
-            box-shadow: var(--sh-2);
-            opacity: 0;
-            pointer-events: none;
-            transition: .3s;
-            z-index: 90;
-            border: 1px solid rgba(103, 232, 249, .3);
-        }
-        .to-top.show {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .to-top:hover {
-            transform: translateY(-3px);
-        }
-        .to-top svg {
-            width: 20px;
-            height: 20px;
-        }
-        .reveal {
-            opacity: 0;
-            transform: translateY(26px);
-            transition: opacity .7s ease, transform .7s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
+        .btn-primary:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
             transform: none;
         }
-        @media(prefers-reduced-motion: reduce) {
-            html {
-                scroll-behavior: auto;
-            }
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            .reveal {
-                opacity: 1;
-                transform: none;
-            }
+
+        .btn-success {
+            background: var(--success-color);
         }
-        @media print {
-            .site-header,
-            .to-top,
-            .logos,
-            .hero-visual .chip,
-            .car-controls,
-            #cookie-banner {
-                display: none !important;
-            }
-            .hero {
-                padding: 2rem 0;
-                background: var(--navy-900) !important;
-                color: #fff !important;
-            }
-            .section {
-                padding: 2rem 0;
-            }
-            .card:hover {
-                transform: none !important;
-            }
-            .tabpanel {
-                border: 1px solid #ccc;
-                box-shadow: none;
-            }
-            .tab[aria-selected="true"] {
-                background: #eee;
-                color: #000;
-            }
+        .btn-success:hover:not(:disabled) { background: #16a34a; }
+
+        .status-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+        }
+
+        .status-message.error { display: block; background: #fef2f2; color: var(--danger-color); border: 1px solid #fecaca; }
+        .status-message.success { display: block; background: #f0fdf4; color: var(--success-color); border: 1px solid #bbf7d0; }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-top: 3px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        .btn-primary.loading .spinner { display: inline-block; }
+        .btn-primary.loading .btn-text { display: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ==========================================
+           SECTION 4: DEMO BOOK & SIMULATOR DASHBOARD
+           ========================================== */
+        .demo-book-section {
+            background: linear-gradient(135deg, #fefce8, #fef9c3);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border: 1px solid #fde68a;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .demo-book-btn {
+            background: var(--warning-color);
+            color: #1e293b;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(245, 158, 11, 0.3);
+            transition: all var(--transition-speed);
+            width: 100%;
+        }
+
+        .demo-book-btn:hover { transform: scale(1.02); background: #d97706; color: white; }
+        .demo-book-btn:disabled { background: #9ca3af; box-shadow: none; cursor: not-allowed; transform: none; color: #4b5563; }
+
+        .simulator-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0 15px 0;
+            color: var(--text-dark);
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+        }
+
+        .sim-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+
+        .sim-btn {
+            padding: 16px 10px;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            text-align: center;
+        }
+        
+        .sim-btn:hover:not(:disabled) { background: #e2e8f0; transform: translateY(-3px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .sim-btn:disabled { background: #f8fafc; color: #94a3b8; cursor: not-allowed; border-color: #f1f5f9; }
+        
+        .sim-btn.icon-start { border-left: 4px solid var(--success-color); }
+        .sim-btn.icon-pause { border-left: 4px solid var(--warning-color); }
+        .sim-btn.icon-danger { border-left: 4px solid var(--danger-color); background: #fef2f2; }
+        .sim-btn.icon-danger:hover:not(:disabled) { background: #fecaca; }
+
+        /* ==========================================
+           SECTION 5: FOOTER
+           ========================================== */
+        .app-footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-light);
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 480px) {
+            .sim-grid { grid-template-columns: 1fr 1fr; }
+            .app-container { padding: 20px 15px; }
         }
     </style>
 </head>
 <body>
 
-    <a class="skip-link" href="#main">Skip to content</a>
+    <!-- Main Application Container -->
+    <div class="app-container">
 
-    <!-- ====== SVG SPRITE ====== -->
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-        <defs>
-            <symbol id="i-logo" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.5V12m0 0l-5.6 5M12 12l5.6 5"/></g></symbol>
-            <symbol id="i-menu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></g></symbol>
-            <symbol id="i-close" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></g></symbol>
-            <symbol id="i-layers" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13.5l9 5 9-5"/></g></symbol>
-            <symbol id="i-net" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.4"/><circle cx="5" cy="19" r="2.4"/><circle cx="19" cy="19" r="2.4"/><path d="M12 7.5V12m0 0l-5.6 5M12 12l5.6 5"/></g></symbol>
-            <symbol id="i-iot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><rect x="10.6" y="10.6" width="2.8" height="2.8"/><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"/></g></symbol>
-            <symbol id="i-flow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></g></symbol>
-            <symbol id="i-web" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14.5 14.5 0 010 18M12 3a14.5 14.5 0 000 18"/></g></symbol>
-            <symbol id="i-term" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/></g></symbol>
-            <symbol id="i-cloud" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 18.5a4.5 4.5 0 00.4-9A6 6 0 006.2 11a4 4 0 00.8 7.5h10.5z"/></g></symbol>
-            <symbol id="i-server" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></g></symbol>
-            <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></g></symbol>
-            <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g></symbol>
-            <symbol id="i-chev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></g></symbol>
-            <symbol id="i-left" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></g></symbol>
-            <symbol id="i-right" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></g></symbol>
-            <symbol id="i-up" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M6 11l6-6 6 6"/></g></symbol>
-            <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></g></symbol>
-            <symbol id="i-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2z"/></g></symbol>
-            <symbol id="i-chip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2.5v2.5M15 2.5V5M9 19v2.5M15 19v2.5M2.5 9H5M2.5 15H5M19 9h2.5M19 15h2.5"/></g></symbol>
-            <symbol id="i-expand" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></g></symbol>
-            <symbol id="i-code" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6L3 12l6 6M15 6l6 6-6 6"/></g></symbol>
-            <symbol id="i-gauge" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 1116 0"/><path d="M12 14l4-4"/><path d="M2 18h20"/></g></symbol>
-        </defs>
-    </svg>
+        <!-- Header -->
+        <header class="app-header">
+            <h1>⚡ MIMIC Suite</h1>
+            <p>Automated Login & Simulation Dashboard</p>
+        </header>
 
-    <!-- ====== HEADER ====== -->
-    <header class="site-header" id="header">
-        <div class="container header-inner">
-            <a class="brand" href="#top" aria-label="MIMIC home">
-                <span class="brand-mark"><svg><use href="#i-logo"/></svg></span>
-                MIMIC<sup>®</sup>
-            </a>
-            <nav class="desktop-nav" aria-label="Primary">
-                <a class="nav-link" href="#products">Products</a>
-                <a class="nav-link" href="#solutions">Solutions</a>
-                <a class="nav-link" href="#scalability">Scalability</a>
-                <a class="nav-link" href="#testimonials">Customers</a>
-                <a class="nav-link" href="#faq">FAQ</a>
-                <a class="nav-cta" href="#contact">Book a Demo</a>
-            </nav>
-            <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle menu">
-                <svg class="i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
-                <svg class="i-close" aria-hidden="true"><use href="#i-close"/></svg>
+        <!-- STEP 1: Email Submission -->
+        <section id="step1" class="step-container active">
+            <div class="input-group">
+                <label for="userEmail">Enter your Registered Email</label>
+                <input type="email" id="userEmail" class="form-input" placeholder="example@gmail.com" required autocomplete="email">
+            </div>
+            
+            <button id="sendOtpButton" class="btn-primary" onclick="handleSendOtp()">
+                <span class="spinner"></span>
+                <span class="btn-text">Send Secure OTP</span>
             </button>
-        </div>
-    </header>
-    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-        <a href="#products">Products</a>
-        <a href="#solutions">Solutions</a>
-        <a href="#scalability">Scalability</a>
-        <a href="#testimonials">Customers</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Book a Demo →</a>
-    </nav>
 
-    <main id="main">
-        <!-- ====== HERO ====== -->
-        <section class="hero" id="top" aria-labelledby="hero-title">
-            <div class="container hero-grid">
-                <div>
-                    <span class="eyebrow"><span class="pulse-dot" aria-hidden="true"></span> Simulate Your Entire IT Infrastructure</span>
-                    <h1 id="hero-title">The Ultimate <span class="grad">Network Environment</span> Simulator</h1>
-                    <p class="hero-sub">MIMIC® Simulator Suite is a powerful, scalable, extensible and configurable platform for testing, demos and development — build virtual labs with up to <strong>100,000 devices</strong> on a single workstation.</p>
-                    <div class="hero-actions">
-                        <a class="btn btn-primary" href="#contact">Start Free Trial <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-                        <a class="btn btn-ghost" href="#products">Explore the Suite</a>
-                    </div>
-                    <ul class="hero-meta">
-                        <li><svg aria-hidden="true"><use href="#i-check"/></svg> SNMP v1 / v2c / v3</li>
-                        <li><svg aria-hidden="true"><use href="#i-check"/></svg> NetFlow · sFlow · IPFIX</li>
-                        <li><svg aria-hidden="true"><use href="#i-check"/></svg> Cisco IOS® · IPMI · Redfish</li>
-                    </ul>
-                </div>
-                <div class="hero-visual" aria-hidden="true">
-                    <div class="chip chip-1"><b>100,000</b> devices / node</div>
-                    <div class="chip chip-2">REST · SOAP · XML · HTTP</div>
-                    <svg viewBox="0 0 640 520" role="img" aria-label="MIMIC core connected to IoT, Server, Cloud and NetFlow nodes">
-                        <defs>
-                            <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="1">
-                                <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#5eead4"/>
-                            </linearGradient>
-                            <radialGradient id="coreGrad" cx="50%" cy="40%" r="70%">
-                                <stop offset="0" stop-color="#155e75"/><stop offset="1" stop-color="#0a192f"/>
-                            </radialGradient>
-                        </defs>
-                        <circle class="ring" cx="320" cy="260" r="150"/>
-                        <circle class="ring" cx="320" cy="260" r="215"/>
-                        <path class="link-line" d="M320 260 L175 130"/>
-                        <path class="link-line" d="M320 260 L465 130"/>
-                        <path class="link-line" d="M320 260 L155 392"/>
-                        <path class="link-line" d="M320 260 L485 392"/>
-                        <g transform="translate(175,130)">
-                            <circle class="node-halo" r="36"/><circle class="node-body" r="27"/>
-                            <use href="#i-iot" x="-12" y="-12" width="24" height="24" class="node-icon"/>
-                            <text class="node-label" y="54">IoT</text>
-                        </g>
-                        <g transform="translate(465,130)">
-                            <circle class="node-halo" r="36"/><circle class="node-body" r="27"/>
-                            <use href="#i-server" x="-12" y="-12" width="24" height="24" class="node-icon"/>
-                            <text class="node-label" y="54">Server</text>
-                        </g>
-                        <g transform="translate(155,392)">
-                            <circle class="node-halo" r="36"/><circle class="node-body" r="27"/>
-                            <use href="#i-cloud" x="-12" y="-12" width="24" height="24" class="node-icon"/>
-                            <text class="node-label" y="54">Cloud</text>
-                        </g>
-                        <g transform="translate(485,392)">
-                            <circle class="node-halo" r="36"/><circle class="node-body" r="27"/>
-                            <use href="#i-flow" x="-12" y="-12" width="24" height="24" class="node-icon"/>
-                            <text class="node-label" y="54">NetFlow</text>
-                        </g>
-                        <g transform="translate(320,260)">
-                            <circle class="node-halo" r="60"/><circle class="core-body" r="46"/>
-                            <text class="core-label" y="7">MIMIC</text>
-                        </g>
-                    </svg>
-                </div>
-            </div>
+            <div id="statusMessage" class="status-message"></div>
+            
+            <p style="margin-top: 15px; font-size: 12px; color: var(--text-light); text-align: center;">
+                * An OTP will be sent to your email automatically. Email app will not open.
+            </p>
         </section>
 
-        <!-- ====== TRUSTED BY ====== -->
-        <div class="logos" aria-label="Trusted by industry leaders">
-            <div class="container logos-inner">
-                <span class="logos-label">Trusted by 1,000+ enterprises:</span>
-                <span class="logo-item">HP</span><span class="logo-item">CISCO</span><span class="logo-item">DELL EMC</span>
-                <span class="logo-item">AVAYA</span><span class="logo-item">SITA</span><span class="logo-item">APC</span>
-                <span class="logo-item">XIRRUS</span><span class="logo-item">LANCOPE</span><span class="logo-item">PEPCO</span>
+        <!-- STEP 2: OTP Verification (Auto-Verified) -->
+        <section id="step2" class="step-container">
+            <div class="input-group">
+                <label for="otpInput">Enter the 4-Digit OTP</label>
+                <input type="text" id="otpInput" class="form-input" placeholder="e.g. 4829" maxlength="4" inputmode="numeric">
             </div>
-        </div>
-
-        <!-- ====== PRODUCTS ====== -->
-        <section class="section" id="products" aria-labelledby="products-title">
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="kicker">Our Products</span>
-                    <h2 id="products-title">The MIMIC® Simulator Suite</h2>
-                    <p>Six purpose-built simulators, one unified virtual lab — for networks, servers, IoT and storage devices.</p>
-                </div>
-                <div class="cards">
-                    <article class="card reveal"><span class="tag">Core</span>
-                        <div class="icon-badge"><svg aria-hidden="true"><use href="#i-layers"/></svg></div>
-                        <h3>MIMIC® Simulator Suite</h3>
-                        <p>A powerful network environment simulator. Scalable, extensible and configurable tools for testing, demos and development.</p>
-                    </article>
-                    <article class="card reveal">
-                        <div class="icon-badge"><svg aria-hidden="true"><use href="#i-net"/></svg></div>
-                        <h3>MIMIC® SNMP Simulator</h3>
-                        <p>Creates a network of up to 100,000 SNMP-manageable devices. Build any SNMP-based device with any number of public or private MIBs.</p>
-                    </article>
-                    <article class="card reveal">
-                        <div class="icon-badge"><svg aria-hidden="true"><use href="#i-iot"/></svg></div>
-                        <h3>MIMIC® IoT Simulator</h3>
-                        <p>Create large, customizable Test and POC environments populated with thousands of IoT sensors and connected devices.</p>
-                    </article>
-                    <article class="card reveal">
-                        <div class="icon-badge"><svg aria-hidden="true"><use href="#i-flow"/></svg></div>
-                        <h3>MIMIC® NetFlow / sFlow Simulator</h3>
-                        <p>Generates a full variety of flows with complete control, so you can fully test your monitoring and analytics applications.</p>
-                    </article>
-                    <article class="card reveal">
-                        <div class="icon-badge"><svg aria-hidden="true"><use href="#i-web"/></svg></div>
-                        <h3>MIMIC® Web Simulator</h3>
-                        <p>A virtual lab with hundreds of simulated web servers — easily develop and test load balancers and web applications.</p>
-                    </article>
-                    <article class="card reveal">
-                        <div class="icon-badge"><svg aria-hidden="true"><use href="#i-term"/></svg></div>
-                        <h3>MIMIC® IOS Simulator</h3>
-                        <p>Fully supports Cisco IOS® software and SNMP v1, v2, v2c, v3 — simulate up to 100,000 devices in a single workstation.</p>
-                    </article>
-                </div>
-
-                <div class="table-wrap reveal" style="margin-top:3rem" id="comparison-table">
-                    <table>
-                        <caption class="skip-link">Simulator capability comparison</caption>
-                        <thead>
-                            <tr><th scope="col">Capability</th><th scope="col">SNMP</th><th scope="col">IOS</th><th scope="col">Web</th><th scope="col">NetFlow</th><th scope="col">IoT</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Up to 100,000 devices per node</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                            <tr><td>SNMP v1 / v2c / v3 agents</td><td class="tick">✓</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-                            <tr><td>Cisco IOS® CLI emulation</td><td class="dash">—</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-                            <tr><td>MIB Wizard — compile any MIB</td><td class="tick">✓</td><td class="tick">✓</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td></tr>
-                            <tr><td>NetFlow / sFlow / IPFIX export</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                            <tr><td>HTTP / REST / SOAP / XML</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                            <tr><td>IPMI / Redfish server interfaces</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                            <tr><td>Custom IoT sensor profiles</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="tick">✓</td><td class="tick">✓</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
+            <button id="verifyOtpButton" class="btn-primary btn-success" onclick="handleVerifyOtp()">
+                <span class="spinner"></span>
+                <span class="btn-text">Verify & Unlock Suite</span>
+            </button>
         </section>
 
-        <!-- ====== SOLUTIONS ====== -->
-        <section class="section" id="solutions" style="background:#eef4fa" aria-labelledby="solutions-title">
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="kicker">Solutions</span>
-                    <h2 id="solutions-title">Built for Every Team</h2>
-                    <p>From QA labs to sales demos, operator training and disaster simulations.</p>
-                </div>
-
-                <div class="tabs" role="tablist" aria-label="Solutions">
-                    <button class="tab" role="tab" id="tab-0" aria-selected="true" aria-controls="panel-0">SNMP Testing</button>
-                    <button class="tab" role="tab" id="tab-1" aria-selected="false" aria-controls="panel-1" tabindex="-1">Cloud Infrastructure</button>
-                    <button class="tab" role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" tabindex="-1">Server Apps</button>
-                    <button class="tab" role="tab" id="tab-3" aria-selected="false" aria-controls="panel-3" tabindex="-1">Scalability</button>
-                    <button class="tab" role="tab" id="tab-4" aria-selected="false" aria-controls="panel-4" tabindex="-1">Management Apps</button>
-                    <button class="tab" role="tab" id="tab-5" aria-selected="false" aria-controls="panel-5" tabindex="-1">IoT Labs</button>
-                </div>
-
-                <div class="tabpanel" role="tabpanel" id="panel-0" aria-labelledby="tab-0">
-                    <div>
-                        <h3>Test SNMP-Based Applications</h3>
-                        <p class="lead">Create any SNMP-based device with any number of public or private MIBs and run a large variety of device configurations.</p>
-                        <ul class="checklist">
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Controlled, repeatable regression &amp; integration test environments</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Simulate rare or unavailable hardware on demand</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Full SNMP v1, v2, v2c and v3 support with traps &amp; informs</li>
-                        </ul>
-                    </div>
-                    <div class="panel-visual"><svg aria-hidden="true"><use href="#i-net"/></svg><span class="big">100k</span><span class="lbl">Manageable devices</span></div>
-                </div>
-
-                <div class="tabpanel" role="tabpanel" id="panel-1" aria-labelledby="tab-1" hidden>
-                    <div>
-                        <h3>Verify Your Cloud Infrastructure</h3>
-                        <p class="lead">The MIMIC Discovery Wizard records your production network or test lab with thousands of real-world devices — then simulates and multiplies them.</p>
-                        <ul class="checklist">
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Record &amp; replicate real topologies in minutes</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> MIB Wizard compiles any number of SNMP MIBs</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Pre-deployment scalability &amp; performance validation</li>
-                        </ul>
-                    </div>
-                    <div class="panel-visual"><svg aria-hidden="true"><use href="#i-cloud"/></svg><span class="big">∞</span><span class="lbl">Topology replication</span></div>
-                </div>
-
-                <div class="tabpanel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
-                    <div>
-                        <h3>Server Applications Testing</h3>
-                        <p class="lead">Test your management application's scalability against thousands of servers — and push load balancers and web server farms to their limits, safely.</p>
-                        <ul class="checklist">
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> REST, SOAP, XML, HTTP, Redfish and IPMI interfaces</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Simulate thousands of servers on one machine</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Stress-test without touching production</li>
-                        </ul>
-                    </div>
-                    <div class="panel-visual"><svg aria-hidden="true"><use href="#i-server"/></svg><span class="big">1000s</span><span class="lbl">Virtual servers</span></div>
-                </div>
-
-                <div class="tabpanel" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
-                    <div>
-                        <h3>Scalable Infrastructure</h3>
-                        <p class="lead">MIMIC is an extremely scalable simulator — highly optimized simulations with minimal CPU and memory overhead per device.</p>
-                        <ul class="checklist">
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> 100,000 devices on a 64-bit processor (Intel Xeon / AMD64)</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> 10,000 devices on a 32-bit processor</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Replace entire hardware labs with one workstation</li>
-                        </ul>
-                    </div>
-                    <div class="panel-visual"><svg aria-hidden="true"><use href="#i-expand"/></svg><span class="big">64-bit</span><span class="lbl">Optimized engine</span></div>
-                </div>
-
-                <div class="tabpanel" role="tabpanel" id="panel-4" aria-labelledby="tab-4" hidden>
-                    <div>
-                        <h3>Develop Management Apps</h3>
-                        <p class="lead">Give developers a safe, high-fidelity sandbox to build, debug and demo NMS applications — no production risk, no hardware budget.</p>
-                        <ul class="checklist">
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Virtually eliminate demo hardware &amp; shipping costs</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Compelling trade-show and sales demonstrations</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Full protocol fidelity for faster development cycles</li>
-                        </ul>
-                    </div>
-                    <div class="panel-visual"><svg aria-hidden="true"><use href="#i-code"/></svg><span class="big">10×</span><span class="lbl">Faster dev cycles</span></div>
-                </div>
-
-                <div class="tabpanel" role="tabpanel" id="panel-5" aria-labelledby="tab-5" hidden>
-                    <div>
-                        <h3>Large IoT Environments</h3>
-                        <p class="lead">Simulate large, customizable Internet of Things labs for end-to-end, real-time development, regression testing and rapid deployment.</p>
-                        <ul class="checklist">
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Smart-city and connected-car scenarios</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Performance tuning &amp; pre-deployment scalability testing</li>
-                            <li><svg aria-hidden="true"><use href="#i-check"/></svg> Compelling demos and operator training</li>
-                        </ul>
-                    </div>
-                    <div class="panel-visual"><svg aria-hidden="true"><use href="#i-iot"/></svg><span class="big">IoT</span><span class="lbl">End-to-end labs</span></div>
-                </div>
+        <!-- STEP 3: Dashboard Access -->
+        <section id="step3" class="step-container">
+            
+            <!-- Demo Book Access Card -->
+            <div class="demo-book-section">
+                <h3 style="margin-bottom: 10px; color: #92400e;">📖 Demo Book Access</h3>
+                <button id="demoBookBtn" class="demo-book-btn" onclick="openDemoBook()" disabled>
+                    🔒 Locked - Verify OTP First
+                </button>
             </div>
+
+            <!-- Mimic Simulator Buttons -->
+            <div class="simulator-title">🚀 MIMIC Simulator Control Suite</div>
+            <div class="sim-grid">
+                <button class="sim-btn icon-start" onclick="simAction('Start Simulation')" disabled>▶ Start</button>
+                <button class="sim-btn icon-pause" onclick="simAction('Pause Simulation')" disabled>⏸ Pause</button>
+                <button class="sim-btn" onclick="simAction('Restart Process')" disabled>🔄 Restart</button>
+                <button class="sim-btn icon-danger" onclick="simAction('Emergency Stop')" disabled>⛔ Stop</button>
+                <button class="sim-btn" onclick="simAction('Check Diagnostic')" disabled>📡 Diagnostic</button>
+                <button class="sim-btn" onclick="simAction('Export Logs')" disabled>💾 Export Logs</button>
+            </div>
+            <p style="font-size: 12px; color: var(--text-light); text-align: center; margin-top: 15px;">
+                All buttons enable automatically upon successful OTP verification.
+            </p>
         </section>
 
-        <!-- ====== SCALABILITY ====== -->
-        <section class="section dark-band" id="scalability" aria-labelledby="scale-title">
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="kicker" style="color:var(--teal-300)">Performance</span>
-                    <h2 id="scale-title">Engineered for Extreme Scale</h2>
-                    <p>Highly optimized simulations that replace server rooms with a single workstation.</p>
-                </div>
-                <div class="spec-grid">
-                    <div class="spec reveal"><svg aria-hidden="true"><use href="#i-chip"/></svg><b><span data-count="100000" data-suffix="+">0</span></b><p>Simulated devices on a 64-bit processor (Intel Xeon / AMD64)</p></div>
-                    <div class="spec reveal"><svg aria-hidden="true"><use href="#i-gauge"/></svg><b><span data-count="10000" data-suffix="+">0</span></b><p>Simulated devices on a 32-bit processor</p></div>
-                    <div class="spec reveal"><svg aria-hidden="true"><use href="#i-server"/></svg><b><span data-count="1000" data-suffix="+">0</span></b><p>Enterprises &amp; networking vendors rely on MIMIC worldwide</p></div>
-                    <div class="spec reveal"><svg aria-hidden="true"><use href="#i-layers"/></svg><b><span data-count="6">0</span></b><p>Purpose-built simulators in one unified suite</p></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ====== TESTIMONIALS ====== -->
-        <section class="section" id="testimonials" aria-labelledby="testimonial-title">
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="kicker">Customers</span>
-                    <h2 id="testimonial-title">Trusted by Industry Leaders</h2>
-                </div>
-                <div class="carousel reveal" id="carousel">
-                    <div class="slide active">
-                        <div class="quote-card"><div class="qmark" aria-hidden="true">“</div>
-                            <blockquote>MIMIC has proven to be an extremely useful solution for testing HP/OpenView. We create controlled test environments that won't change — which is not feasible in a physical lab — and add rare devices that are not easily accessible.</blockquote>
-                            <div class="who">Kelly Smith</div><div class="role">OVBU R&amp;D, Software Infrastructure Services Lab — HP</div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="quote-card"><div class="qmark" aria-hidden="true">“</div>
-                            <blockquote>With MIMIC we've virtually eliminated the demo hardware budget and its related shipping and set-up costs. It's a powerful sales tool for enterprises, telcos and service providers.</blockquote>
-                            <div class="who">Bob Verboski</div><div class="role">Project / Pre-Sales Manager — InfoVista</div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="quote-card"><div class="qmark" aria-hidden="true">“</div>
-                            <blockquote>As a big proponent of "learning by doing", MIMIC Virtual Lab is the closest thing to having the real equipment in front of you. A must-have for anyone serious about Cisco certifications.</blockquote>
-                            <div class="who">Matt Basham</div><div class="role">Program Director, "Learning by Doing" — St. Petersburg College</div>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="quote-card"><div class="qmark" aria-hidden="true">“</div>
-                            <blockquote>You guys are the best support team I have experienced. Quick, friendly, knowledgeable — and have a great SNMP Simulator product!</blockquote>
-                            <div class="who">Leonard A. Kirchner</div><div class="role">Senior System Administrator — U.S. Army</div>
-                        </div>
-                    </div>
-                    <div class="car-controls">
-                        <button class="car-btn" id="prev" aria-label="Previous testimonial"><svg aria-hidden="true"><use href="#i-left"/></svg></button>
-                        <div class="dots" role="tablist" aria-label="Testimonial slides">
-                            <button class="dot active" role="tab" aria-label="Slide 1" data-index="0"></button>
-                            <button class="dot" role="tab" aria-label="Slide 2" data-index="1"></button>
-                            <button class="dot" role="tab" aria-label="Slide 3" data-index="2"></button>
-                            <button class="dot" role="tab" aria-label="Slide 4" data-index="3"></button>
-                        </div>
-                        <button class="car-btn" id="next" aria-label="Next testimonial"><svg aria-hidden="true"><use href="#i-right"/></svg></button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ====== FAQ ====== -->
-        <section class="section" id="faq" style="background:#eef4fa" aria-labelledby="faq-title">
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="kicker">FAQ</span>
-                    <h2 id="faq-title">Frequently Asked Questions</h2>
-                </div>
-                <div class="faq reveal">
-                    <div class="faq-item">
-                        <button class="faq-q" aria-expanded="false">How many devices can MIMIC simulate? <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
-                        <div class="faq-a"><div class="faq-a-inner">Up to 100,000 simulated devices on a 64-bit processor (Intel Xeon or AMD64) and 10,000 on a 32-bit processor — all from a single workstation.</div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-q" aria-expanded="false">Do I need real hardware? <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
-                        <div class="faq-a"><div class="faq-a-inner">No. MIMIC creates a complete virtual lab — routers, switches, servers, IoT sensors and web servers — so you can test, train and demo without any physical equipment.</div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-q" aria-expanded="false">Can I use my own MIBs? <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
-                        <div class="faq-a"><div class="faq-a-inner">Yes. The MIMIC MIB Wizard compiles any number of public or private SNMP MIBs, and the Discovery Wizard can record your real network to replicate it in the lab.</div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-q" aria-expanded="false">Which protocols are supported? <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
-                        <div class="faq-a"><div class="faq-a-inner">SNMP v1/v2/v2c/v3, NetFlow, sFlow, IPFIX, Cisco IOS® CLI, HTTP, REST, SOAP, XML, IPMI and Redfish — plus customizable IoT sensor protocols.</div></div>
-                    </div>
-                    <div class="faq-item">
-                        <button class="faq-q" aria-expanded="false">Is a free trial available? <svg aria-hidden="true"><use href="#i-chev"/></svg></button>
-                        <div class="faq-a"><div class="faq-a-inner">Yes — contact our sales team at <a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a> to get an evaluation license and a live demonstration.</div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ====== CONTACT ====== -->
-        <section class="section" id="contact" aria-labelledby="contact-title">
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="kicker">Get Started</span>
-                    <h2 id="contact-title">Build Your Virtual Lab Today</h2>
-                    <p>Talk to an engineer, request a trial, or book a live demo.</p>
-                </div>
-                <div class="contact-grid reveal">
-                    <div class="contact-info">
-                        <h3>Gambit Communications<sup>®</sup></h3>
-                        <p>Provider of tools for simulating IoT things, servers, networking and storage devices — trusted for testing, development, deployment, operator training and disaster simulations.</p>
-                        <div class="c-line"><svg aria-hidden="true"><use href="#i-mail"/></svg><a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a></div>
-                        <div class="c-line"><svg aria-hidden="true"><use href="#i-check"/></svg>Response within one business day</div>
-                    </div>
-                    <div class="form-card">
-                        <!-- Standard form – works even without JS -->
-                        <form id="contactForm" action="https://formspree.io/f/55986e8e-7ec0-4214-8ca2-f9ee1810c99f" method="POST" novalidate>
-                            <div class="form-row two">
-                                <div class="field"><label for="name">Full name *</label><input type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Doe" /><span class="err">Please enter your name.</span></div>
-                                <div class="field"><label for="email">Work email *</label><input type="email" id="email" name="email" required autocomplete="email" placeholder="jane@company.com" /><span class="err">Please enter a valid email address.</span></div>
-                            </div>
-                            <div class="form-row two">
-                                <div class="field"><label for="company">Company</label><input type="text" id="company" name="company" autocomplete="organization" placeholder="Company Inc." /></div>
-                                <div class="field"><label for="interest">I'm interested in *</label>
-                                    <select id="interest" name="interest" required>
-                                        <option value="">Select a product…</option>
-                                        <option>MIMIC® Simulator Suite</option><option>MIMIC® SNMP Simulator</option>
-                                        <option>MIMIC® IoT Simulator</option><option>MIMIC® NetFlow/sFlow Simulator</option>
-                                        <option>MIMIC® Web Simulator</option><option>MIMIC® IOS Simulator</option>
-                                    </select><span class="err">Please choose a product.</span>
-                                </div>
-                            </div>
-                            <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="4" placeholder="Tell us about your testing environment…"></textarea></div>
-                            <button class="btn btn-primary" type="submit" style="width:100%">Send Request <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
-                        </form>
-                        <div class="form-success" id="formSuccess" role="status">
-                            <div class="ok"><svg aria-hidden="true"><use href="#i-check"/></svg></div>
-                            <h3>Thank you!</h3>
-                            <p style="color:var(--muted)">Your request has been received. Our team will contact you within one business day.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- ====== FOOTER ====== -->
-    <footer class="site-footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <a class="brand" href="#top" style="margin-bottom:1rem"><span class="brand-mark"><svg aria-hidden="true"><use href="#i-logo"/></svg></span>MIMIC<sup>®</sup></a>
-                    <p style="font-size:.9rem;max-width:26rem">A powerful network environment simulator for scalable, extensible and configurable testing, demo and development tools.</p>
-                </div>
-                <div><h4>Products</h4><ul>
-                        <li><a href="#products">Simulator Suite</a></li>
-                        <li><a href="#products">SNMP Simulator</a></li>
-                        <li><a href="#products">IoT Simulator</a></li>
-                        <li><a href="#products">NetFlow Simulator</a></li>
-                        <li><a href="#products">Web Simulator</a></li>
-                        <li><a href="#products">IOS Simulator</a></li>
-                    </ul></div>
-                <div><h4>Solutions</h4><ul>
-                        <li><a href="#solutions">SNMP Testing</a></li>
-                        <li><a href="#solutions">Cloud Infrastructure</a></li>
-                        <li><a href="#solutions">Server Apps</a></li>
-                        <li><a href="#solutions">IoT Labs</a></li>
-                        <li><a href="#scalability">Scalability</a></li>
-                    </ul></div>
-                <div><h4>Company</h4><ul>
-                        <li><a href="#testimonials">Customers</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="mailto:pintukhankhan405@gmail.com">pintukhankhan405@gmail.com</a></li>
-                    </ul></div>
-            </div>
-            <div class="footer-bottom">
-                <span>
-                    © <span id="year"></span> Gambit Communications, Inc. All rights reserved. MIMIC® is a registered trademark.
-                </span>
-                <span>Simulate · Test · Deploy</span>
-            </div>
-        </div>
-    </footer>
-
-    <button class="to-top" id="toTop" aria-label="Back to top"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
-
-    <!-- ====== COOKIE BANNER ====== -->
-    <div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:var(--navy-900);color:#e2e8f0;padding:1rem 1.5rem;text-align:center;z-index:99;border-top:1px solid rgba(103,232,249,.2);display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:1rem;font-size:.9rem;">
-        <span>We use cookies to improve your experience. By using this site you agree to our <a href="/privacy-policy" style="color:var(--cyan-300);text-decoration:underline;">Privacy Policy</a>.</span>
-        <button id="cookie-accept" style="background:var(--cyan-500);color:#fff;padding:.5rem 1.4rem;border-radius:8px;font-weight:700;border:0;cursor:pointer;">Accept</button>
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2026 MIMIC Simulator Suite | Secure OTP Gateway</p>
+        </footer>
     </div>
 
-    <!-- ====== JAVASCRIPT ====== -->
+    <!-- ==========================================================
+         SECTION 6: COMPLETE JAVASCRIPT LOGIC
+         ========================================================== -->
     <script>
-        (function() {
-            'use strict';
+        // ==========================================
+        // CONFIGURATION BLOCK
+        // ==========================================
+        const CONFIG = {
+            // Paste your unique Google Apps Script Web App URL here
+            scriptUrl: "https://script.google.com/macros/s/AKfycbwGGgGYyk02BIQvWneDR5Vha8tWQWSQ71yVygnJFBptNXi7cDjgtWOyaKD0wuk260j4vQ/exec",
+            secretKey: "MyStrongSecret123" // Must match the exact secret in your Apps Script
+        };
 
-            // ============================================================
-            // Helpers
-            // ============================================================
-            var $ = function(s, c) { return (c || document).querySelector(s); };
-            var $$ = function(s, c) { return Array.from((c || document).querySelectorAll(s)); };
-            var isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // ==========================================
+        // APPLICATION STATE MANAGEMENT
+        // ==========================================
+        const AppState = {
+            currentOtp: null,       // Stores the OTP fetched from the backend
+            isVerified: false,      // Tracks if the OTP verification passed
+            isLoading: false        // Prevents multiple simultaneous clicks
+        };
 
-            // ============================================================
-            // Year
-            // ============================================================
-            (function() {
-                var el = document.getElementById('year');
-                if (el) el.textContent = new Date().getFullYear();
-            })();
+        // Helper function to update UI Step visibility
+        function showStep(stepId) {
+            // First, hide all step containers
+            document.querySelectorAll('.step-container').forEach(el => {
+                el.classList.remove('active');
+            });
+            // Then, show the requested step
+            document.getElementById(stepId).classList.add('active');
+        }
 
-            // ============================================================
-            // Header scroll effect + back-to-top
-            // ============================================================
-            (function() {
-                var header = document.getElementById('header');
-                var toTop = document.getElementById('toTop');
-                if (!header || !toTop) return;
-                var ticking = false;
+        // Helper function to update the Status Message Box
+        function setStatusMessage(message, type) {
+            const statusBox = document.getElementById('statusMessage');
+            statusBox.textContent = message;
+            statusBox.className = 'status-message ' + type; // error or success
+        }
 
-                var update = function() {
-                    var y = window.scrollY;
-                    header.classList.toggle('scrolled', y > 8);
-                    toTop.classList.toggle('show', y > 600);
-                    ticking = false;
-                };
+        // Helper function to toggle button loading state
+        function toggleButtonLoading(buttonId, isLoading) {
+            const btn = document.getElementById(buttonId);
+            if (isLoading) {
+                btn.classList.add('loading');
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
 
-                window.addEventListener('scroll', function() {
-                    if (!ticking) {
-                        requestAnimationFrame(update);
-                        ticking = true;
-                    }
-                }, { passive: true });
+        // ==========================================
+        // STEP 1: SEND OTP (BACKEND REQUEST)
+        // ==========================================
+        async function handleSendOtp() {
+            // Guard clause for overlapping requests
+            if (AppState.isLoading) return;
+            AppState.isLoading = true;
 
-                toTop.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    window.scrollTo({ top: 0, behavior: isReduced ? 'auto' : 'smooth' });
-                    try { history.replaceState(null, null, '#top'); } catch (_) {}
-                });
-            })();
+            const emailInput = document.getElementById('userEmail');
+            const email = emailInput.value.trim();
+            
+            // Validate email format
+            if (!email || !email.includes('@') || !email.includes('.')) {
+                setStatusMessage("⚠️ Please enter a valid email address.", "error");
+                AppState.isLoading = false;
+                return;
+            }
 
-            // ============================================================
-            // Mobile nav
-            // ============================================================
-            (function() {
-                var toggle = document.getElementById('navToggle');
-                var mobileNav = document.getElementById('mobileNav');
-                if (!toggle || !mobileNav) return;
-
-                var open = false;
-                var setOpen = function(state) {
-                    open = state;
-                    mobileNav.classList.toggle('open', state);
-                    toggle.setAttribute('aria-expanded', String(state));
-                };
-
-                toggle.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    setOpen(!open);
-                });
-
-                document.addEventListener('click', function(e) {
-                    if (!open) return;
-                    if (!mobileNav.contains(e.target) && !toggle.contains(e.target)) {
-                        setOpen(false);
-                    }
-                });
-
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape' && open) setOpen(false);
-                });
-
-                mobileNav.addEventListener('click', function(e) {
-                    var a = e.target.closest('a');
-                    if (a) setOpen(false);
-                });
-            })();
-
-            // ============================================================
-            // Scrollspy
-            // ============================================================
-            (function() {
-                var links = $$('.nav-link');
-                if (!links.length) return;
-                var ids = links.map(function(a) {
-                    var href = a.getAttribute('href');
-                    if (href && href.indexOf('#') === 0) return href.substring(1);
-                    return null;
-                }).filter(Boolean);
-
-                var spy = new IntersectionObserver(function(entries) {
-                    var activeId = null;
-                    entries.forEach(function(e) {
-                        if (e.isIntersecting) activeId = e.target.id;
-                    });
-                    if (activeId) {
-                        links.forEach(function(a) {
-                            a.classList.toggle('active', a.getAttribute('href') === '#' + activeId);
-                        });
-                    }
-                }, { rootMargin: '-40% 0px -55% 0px' });
-
-                ids.forEach(function(id) {
-                    var s = document.getElementById(id);
-                    if (s) spy.observe(s);
-                });
-            })();
-
-            // ============================================================
-            // Reveal on scroll
-            // ============================================================
-            (function() {
-                var els = $$('.reveal');
-                if (!els.length) return;
-                var io = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(e) {
-                        if (e.isIntersecting) {
-                            e.target.classList.add('visible');
-                            io.unobserve(e.target);
-                        }
-                    });
-                }, { threshold: .12 });
-                els.forEach(function(el) { io.observe(el); });
-            })();
-
-            // ============================================================
-            // Animated counters
-            // ============================================================
-            (function() {
-                var els = $$('[data-count]');
-                if (!els.length) return;
-
-                var count = function(el) {
-                    var end = parseInt(el.getAttribute('data-count'), 10) || 0;
-                    var suf = el.getAttribute('data-suffix') || '';
-                    if (isReduced) { el.textContent = end.toLocaleString() + suf; return; }
-                    var start = performance.now();
-                    var dur = 1500;
-
-                    var step = function(t) {
-                        var p = Math.min((t - start) / dur, 1);
-                        var eased = 1 - Math.pow(1 - p, 3);
-                        el.textContent = Math.round(end * eased).toLocaleString() + suf;
-                        if (p < 1) requestAnimationFrame(step);
-                    };
-                    requestAnimationFrame(step);
-                };
-
-                var io = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(e) {
-                        if (e.isIntersecting) {
-                            count(e.target);
-                            io.unobserve(e.target);
-                        }
-                    });
-                }, { threshold: .6 });
-                els.forEach(function(el) { io.observe(el); });
-            })();
-
-            // ============================================================
-            // Tabs
-            // ============================================================
-            (function() {
-                var tabs = $$('.tab');
-                var panels = $$('.tabpanel');
-                if (!tabs.length || !panels.length) return;
-
-                var select = function(i) {
-                    tabs.forEach(function(t, j) {
-                        t.setAttribute('aria-selected', j === i);
-                        t.tabIndex = j === i ? 0 : -1;
-                    });
-                    panels.forEach(function(p, j) { p.hidden = j !== i; });
-                };
-
-                tabs.forEach(function(tab, i) {
-                    tab.addEventListener('click', function() { select(i); });
-                    tab.addEventListener('keydown', function(e) {
-                        var next = null;
-                        if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
-                        if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
-                        if (next !== null) {
-                            e.preventDefault();
-                            tabs[next].focus();
-                            select(next);
-                        }
-                    });
-                });
-            })();
-
-            // ============================================================
-            // FAQ Accordion
-            // ============================================================
-            (function() {
-                $$('.faq-item').forEach(function(item) {
-                    var btn = $('.faq-q', item);
-                    var body = $('.faq-a', item);
-                    if (!btn || !body) return;
-
-                    btn.addEventListener('click', function() {
-                        var open = item.classList.toggle('open');
-                        btn.setAttribute('aria-expanded', open);
-                        body.style.maxHeight = open ? body.scrollHeight + 'px' : '0px';
-                    });
-                });
-            })();
-
-            // ============================================================
-            // Testimonial carousel
-            // ============================================================
-            (function() {
-                var slides = $$('.slide');
-                var dots = $$('.dot');
-                var prevBtn = document.getElementById('prev');
-                var nextBtn = document.getElementById('next');
-                if (!slides.length || !dots.length) return;
-
-                var idx = 0;
-                var timer = null;
-
-                var show = function(i) {
-                    idx = (i + slides.length) % slides.length;
-                    slides.forEach(function(s, j) {
-                        s.classList.toggle('active', j === idx);
-                    });
-                    dots.forEach(function(d, j) {
-                        d.classList.toggle('active', j === idx);
-                        d.setAttribute('aria-current', j === idx ? 'true' : 'false');
-                    });
-                };
-
-                var start = function() {
-                    if (isReduced) return;
-                    stop();
-                    timer = setInterval(function() { show(idx + 1); }, 6000);
-                };
-                var stop = function() { if (timer) { clearInterval(timer);
-                        timer = null; } };
-
-                if (prevBtn) prevBtn.addEventListener('click', function() { show(idx - 1);
-                    start(); });
-                if (nextBtn) nextBtn.addEventListener('click', function() { show(idx + 1);
-                    start(); });
-
-                dots.forEach(function(d, j) {
-                    d.addEventListener('click', function() { show(j);
-                        start(); });
+            // UI updates for loading state
+            setStatusMessage("", "");
+            toggleButtonLoading('sendOtpButton', true);
+            
+            try {
+                // Making the background fetch call to Google Apps Script
+                const response = await fetch(CONFIG.scriptUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        secret: CONFIG.secretKey
+                    })
                 });
 
-                var carousel = document.getElementById('carousel');
-                if (carousel) {
-                    carousel.addEventListener('mouseenter', stop);
-                    carousel.addEventListener('mouseleave', start);
-                }
+                // Parse the JSON response from the server
+                const result = await response.json();
 
-                show(0);
-                start();
-            })();
+                if (result.status === 'sent') {
+                    // Save the OTP received from backend into our App State
+                    AppState.currentOtp = result.otp;
+                    
+                    setStatusMessage("✅ OTP successfully generated and sent to your email!", "success");
+                    
+                    // PROCEED TO STEP 2 AND AUTO-VERIFY
+                    showStep('step2');
+                    
+                    // Automatically insert the OTP into the input box
+                    document.getElementById('otpInput').value = AppState.currentOtp;
 
-            // ============================================================
-            // Form – progressive enhancement over standard POST
-            // ============================================================
-            (function() {
-                var form = document.getElementById('contactForm');
-                if (!form) return;
+                    // Delay for 1.5 seconds, then automatically trigger the Verify button
+                    // This completes the "Auto-Verification" pipeline
+                    setTimeout(() => {
+                        handleVerifyOtp();
+                    }, 1500);
 
-                // Validate fields for real‑time feedback
-                var validateField = function(field) {
-                    var input = field.querySelector('input,select,textarea');
-                    if (!input) return true;
-                    var valid = true;
-                    if (input.hasAttribute('required') && !input.value.trim()) valid = false;
-                    if (input.type === 'email' && input.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) valid =
-                        false;
-                    field.classList.toggle('invalid', !valid);
-                    return valid;
-                };
-
-                // Real‑time validation
-                form.addEventListener('input', function(e) {
-                    var f = e.target.closest('.field');
-                    if (f) f.classList.remove('invalid');
-                });
-
-                form.addEventListener('blur', function(e) {
-                    var f = e.target.closest('.field');
-                    if (f && e.target.closest('input,select,textarea')) {
-                        validateField(f);
-                    }
-                }, true);
-
-                // Intercept submit to add AJAX, but still allow native fallback
-                form.addEventListener('submit', function(e) {
-                    // If fetch is supported, we'll try to send via AJAX
-                    if (!window.fetch) return; // fallback to native form POST
-
-                    e.preventDefault();
-
-                    // Validate all required fields
-                    var allValid = true;
-                    form.querySelectorAll('.field').forEach(function(f) {
-                        if (!validateField(f)) allValid = false;
-                    });
-                    if (!allValid) {
-                        // Show inline error (optional)
-                        return;
-                    }
-
-                    var btn = form.querySelector('button[type="submit"]');
-                    var originalText = btn.innerHTML;
-                    btn.innerHTML = 'Sending…';
-                    btn.disabled = true;
-
-                    var data = new FormData(form);
-                    var payload = {};
-                    data.forEach(function(v, k) { payload[k] = v; });
-
-                    var endpoint = form.getAttribute('action');
-
-                    fetch(endpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload),
-                        })
-                        .then(function(response) {
-                            if (response.ok) {
-                                form.style.display = 'none';
-                                var success = document.getElementById('formSuccess');
-                                if (success) success.classList.add('show');
-                            } else {
-                                throw new Error('Formspree rejected');
-                            }
-                        })
-                        .catch(function() {
-                            // Fallback: submit the form natively (reload)
-                            // We'll just revert to native POST by submitting again without preventDefault
-                            // But we need to re‑trigger the submit with JS disabled behaviour.
-                            // Since we prevented default, we can manually submit.
-                            form.submit();
-                        })
-                        .finally(function() {
-                            btn.innerHTML = originalText;
-                            btn.disabled = false;
-                        });
-                });
-            })();
-
-            // ============================================================
-            // Cookie consent
-            // ============================================================
-            (function() {
-                var banner = document.getElementById('cookie-banner');
-                var accept = document.getElementById('cookie-accept');
-                if (!banner || !accept) return;
-
-                var hasConsent = false;
-                try {
-                    hasConsent = localStorage.getItem('cookieConsent') === 'accepted';
-                } catch (_) {}
-
-                if (hasConsent) {
-                    banner.style.display = 'none';
                 } else {
-                    accept.addEventListener('click', function() {
-                        try { localStorage.setItem('cookieConsent', 'accepted'); } catch (_) {}
-                        banner.style.display = 'none';
-                    });
+                    setStatusMessage("❌ Server error: Unable to send OTP. Please try again later.", "error");
                 }
-            })();
 
-        })();
-    </script>
-
-    <!-- ====== JSON-LD ====== -->
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": "MIMIC® Simulator Suite",
-            "description": "Simulate up to 100,000 SNMP, IoT, server and network devices on a single workstation.",
-            "brand": { "@type": "Brand", "name": "Gambit Communications" },
-            "offers": { "@type": "Offer", "url": "https://www.gambitcomm.com/#contact", "priceCurrency": "USD", "price": "0", "availability": "https://schema.org/InStock" }
+            } catch (error) {
+                console.error("Network Error:", error);
+                setStatusMessage("❌ Network Error! Check your internet connection or Script URL.", "error");
+            } finally {
+                // Stop the loading spinner
+                toggleButtonLoading('sendOtpButton', false);
+                AppState.isLoading = false;
+            }
         }
-    </script>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-                { "@type": "Question", "name": "How many devices can MIMIC simulate?", "acceptedAnswer": { "@type": "Answer", "text": "Up to 100,000 simulated devices on a 64-bit processor (Intel Xeon or AMD64) and 10,000 on a 32-bit processor — all from a single workstation." } },
-                { "@type": "Question", "name": "Do I need real hardware?", "acceptedAnswer": { "@type": "Answer", "text": "No. MIMIC creates a complete virtual lab — routers, switches, servers, IoT sensors and web servers — so you can test, train and demo without any physical equipment." } },
-                { "@type": "Question", "name": "Can I use my own MIBs?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The MIMIC MIB Wizard compiles any number of public or private SNMP MIBs, and the Discovery Wizard can record your real network to replicate it in the lab." } },
-                { "@type": "Question", "name": "Which protocols are supported?", "acceptedAnswer": { "@type": "Answer", "text": "SNMP v1/v2/v2c/v3, NetFlow, sFlow, IPFIX, Cisco IOS® CLI, HTTP, REST, SOAP, XML, IPMI and Redfish — plus customizable IoT sensor protocols." } },
-                { "@type": "Question", "name": "Is a free trial available?", "acceptedAnswer": { "@type": "Answer", "text": "Yes — contact our sales team at pintukhankhan405@gmail.com to get an evaluation license and a live demonstration." } }
-            ]
-        }
-    </script>
 
+        // ==========================================
+        // STEP 2: AUTO VERIFY OTP LOGIC
+        // ==========================================
+        function handleVerifyOtp() {
+            const enteredOtp = document.getElementById('otpInput').value.trim();
+
+            // Compare the entered OTP with the one saved in AppState
+            if (enteredOtp === AppState.currentOtp && AppState.currentOtp !== null) {
+                
+                // Verification Success!
+                AppState.isVerified = true;
+
+                // STEP 3: UNLOCK EVERYTHING
+                showStep('step3');
+
+                // Update the Demo Book button
+                const demoBtn = document.getElementById('demoBookBtn');
+                demoBtn.disabled = false;
+                demoBtn.innerHTML = "📖 Open Demo Book Now!";
+                demoBtn.style.background = "#22c55e"; // Success Green
+                demoBtn.style.color = "#ffffff";
+
+                // Enable all the Simulator Grid buttons
+                const simButtons = document.querySelectorAll('.sim-btn');
+                simButtons.forEach(btn => {
+                    btn.disabled = false;
+                });
+
+            } else {
+                // Verification Failure (only triggers if user manually types wrong OTP)
+                alert("❌ Verification Failed! The entered OTP does not match the generated code.");
+            }
+        }
+
+        // ==========================================
+        // STEP 3: DEMO BOOK & SIMULATOR ACTIONS
+        // ==========================================
+        function openDemoBook() {
+            // Opens the Demo Book section
+            alert("✅ SUCCESS: Demo Book opened successfully!\n\nAll MIMIC Simulator buttons are now active and working.");
+            
+            // Optional: Redirect to a specific part of the page
+            window.location.href = "#top";
+        }
+
+        function simAction(actionName) {
+            // Placeholder for actual simulator logic
+            // For demonstration, this alerts the user that the button works
+            const timestamp = new Date().toLocaleTimeString();
+            console.log(`[${timestamp}] User executed: ${actionName}`);
+            
+            alert(`⚙️ SIMULATOR EXECUTION:\nCommand: "${actionName}"\nStatus: Successfully triggered\nTimestamp: ${timestamp}`);
+        }
+
+    </script>
 </body>
 </html>
