@@ -1871,7 +1871,6 @@
                         <li><a href="tel:+16038895100">(603) 889-5100</a></li>
                     </ul></div>
             </div>
-            <!-- ========== FOOTER WITH LEGAL LINKS ========== -->
             <div class="footer-bottom">
                 <span>
                     © <span id="year"></span> Gambit Communications, Inc. All rights reserved. MIMIC® is a registered trademark.
@@ -1894,7 +1893,7 @@
     </div>
 
     <!-- ============================================================
-    JAVASCRIPT — Production‑grade with all fixes integrated
+    JAVASCRIPT — Production‑grade with LIVE Formspree ID
     ============================================================ -->
     <script>
         (function() {
@@ -2096,7 +2095,9 @@
             car.addEventListener('mouseleave', startAuto);
             startAuto();
 
-            // ---- CONTACT FORM – LIVE SUBMISSION ----
+            // ============================================================
+            // CONTACT FORM – LIVE SUBMISSION (Formspree ID: 55986e8e-7ec0-4214-8ca2-f9ee1810c99f)
+            // ============================================================
             const form = $('#contactForm');
 
             function validateField(field) {
@@ -2126,8 +2127,8 @@
                 const data = new FormData(form);
                 const payload = Object.fromEntries(data.entries());
 
-                // 👇 REPLACE this URL with your own endpoint
-                const endpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+                // ✅ Your live Formspree endpoint
+                const endpoint = 'https://formspree.io/f/55986e8e-7ec0-4214-8ca2-f9ee1810c99f';
 
                 fetch(endpoint, {
                         method: 'POST',
@@ -2243,4 +2244,4 @@
         }
     </script>
 </body>
-  </html>
+</html>
